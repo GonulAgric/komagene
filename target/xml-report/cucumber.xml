@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="48.38" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="Üyelik Oluşturma ve Doğrulama" name="Yanlış doğrulama kodu girişi" time="48.108">
+<system-out><![CDATA[
+Given Ana sayfaya gidilir...................................................passed
+When "Üye Ol / Giriş Yap" butonuna tıklanır.................................passed
+And Bir telefon numarası girilir............................................passed
+And "Giriş Yap" butonuna tıklanır...........................................passed
+And Ad, soyad, e-posta bilgileri girilir....................................passed
+And "KVKK Metni" ve "Gizlilik Sözleşmesi" ve "Üyelik Sözleşmesi" checkbox'ları seçilir.passed
+And "Üyeliği Tamamla" butonuna tıklanır.....................................passed
+And Telefonuna yanlış doğrulama kodu girilir................................passed
+And "Giriş Yap" butonuna tekrar tıklanır....................................passed
+Then "Yanlış kod girdiniz" uyarısı görüntülenir.............................passed
+And sayfa kapatılır.........................................................passed
+]]></system-out>
+</testcase>
+</testsuite>
