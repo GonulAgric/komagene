@@ -4,22 +4,21 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
-import java.time.Duration;
-import java.util.Set;
+import java.io.IOException;
 
 import static utilities.ReusableMethods.bekle;
 
-public class LoginStepDef {
+public class ÜyeOlStepDef {
     LoginPage loginPage = new LoginPage();
 
     @Given("Ana sayfaya gidilir")
@@ -48,8 +47,9 @@ public class LoginStepDef {
             bekle(3);
             loginPage.phoneNumber.click();
 
-            loginPage.phoneNumber.sendKeys("05461127610");
+            loginPage.phoneNumber.sendKeys("5062949040");
             loginPage.girişYap.click();
+            bekle(3);
         }
     }
     @When("Ad, soyad, e-posta bilgileri girilir")
@@ -101,10 +101,71 @@ public class LoginStepDef {
 
     @Then("{string} mesajı görüntülenir")
     public void mesajıGörüntülenir(String arg0) {
-        
+
+//        String anaPencereHandle = Driver.getDriver().getWindowHandle();
+//        // Üye ol pop-up ekranına geçiş yap
+//        String mainWindowHandle = Driver.getDriver().getWindowHandle();
+//        for (String handle : Driver.getDriver().getWindowHandles()) {
+//            if (!handle.equals(mainWindowHandle)) {
+//                Driver.getDriver().switchTo().window(handle);
+//                break;
+//            }
+//            String text = loginPage.hoşgeldinizPopUp.getText();
+//            Assert.assertTrue(text.contains("hoş geldininiz"));
+//        }
     }
 
     @And("Telefonuna gelen doğrulama kodu girilir")
-    public void telefonunaGelenDoğrulamaKoduGirilir() {
+    public void telefonunaGelenDoğrulamaKoduGirilir() throws IOException {
+
+        OkHttpClient client = new OkHttpClient();
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType,"{\n" +
+                "    \"FirmaId\":32,\n" +
+                "    \"Telefon\":\"5062949040\"\n" +
+                "}");
+        Request request = new Request.Builder()
+                .url("https://gateway.supergrup.com/auth/auth/testicinguvenlikoduver")
+                .method("POST",body)
+                .build();
+
+        okhttp3.Response response = client.newCall(request).execute();
+
+        int statusCode = response.code();
+        String responseBody = response.body().string();
+
+        System.out.println("Status Code: " + statusCode);
+        System.out.println("Response Body: " +responseBody);
+
+        bekle(5);
+        loginPage.dogrulama.sendKeys(responseBody);
+        loginPage.girisYapAllert.click();
+    }
+
+    @And("Eksik Bir telefon numarası girilir")
+    public void eksikBirTelefonNumarasıGirilir() {
+
+        String anaPencereHandle = Driver.getDriver().getWindowHandle();
+        // Üye ol pop-up ekranına geçiş yap
+        String mainWindowHandle = Driver.getDriver().getWindowHandle();
+        for (String handle : Driver.getDriver().getWindowHandles()) {
+            if (!handle.equals(mainWindowHandle)) {
+                Driver.getDriver().switchTo().window(handle);
+                break;
+            }
+
+            bekle(3);
+            loginPage.phoneNumber.click();
+
+            loginPage.phoneNumber.sendKeys("54611276");
+            loginPage.girişYap.click();
+            bekle(3);
+        }
+    }
+
+    @And("Kullanıcı anasayfaya dön butonuna tıklar.")
+    public void kullanıcıAnasayfayaDönButonunaTıklar() {
+        bekle(3);
+        loginPage.anasayfayaDön.click();
     }
 }

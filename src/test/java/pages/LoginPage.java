@@ -38,7 +38,7 @@ public class LoginPage {
    @FindBy(xpath="//*[@id=\"registerForm\"]/div/div/div[2]/div[4]/div/div/label/span")
        public WebElement üyelikKosullariCheckBox;
 
-   @FindBy(xpath="//*[@id=\"btnSmsLogin\"]")
+   @FindBy(xpath="//button[@id='btnSmsLogin']")
        public WebElement girisYapAllert;
 
 @FindBy(xpath="//*[@id=\"phoneCode1\"]")
@@ -55,5 +55,14 @@ public class LoginPage {
 
   @FindBy(xpath="//*[@id=\"phoneCodeEntryForm\"]")
        public WebElement alert;
+
+    @FindBy(xpath = "//*[@id=\"phoneCode1\"]")
+    public WebElement dogrulama;
+
+    @FindBy(xpath = "//*[@id=\"yeniuyewarning\"]/div/div/div[2]/div/div/div/div[2]/div/h3")
+    public WebElement hoşgeldinizPopUp;
+
+ @FindBy(xpath = "//*[@id=\"yeniuyewarning\"]/div/div/div[2]/div/div/div/div[4]/div/button")
+    public WebElement anasayfayaDön;
 
 }

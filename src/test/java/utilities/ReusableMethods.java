@@ -7,6 +7,8 @@ package utilities;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,9 +19,9 @@ import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
+import static io.restassured.RestAssured.given;
 
 public class ReusableMethods {
 
@@ -268,6 +270,30 @@ public class ReusableMethods {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String generateTokenAdmin() {
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("password", ConfigReader.getProperty("admin_password"));
+        body.put("username", ConfigReader.getProperty("admin_username"));
+
+
+
+        Response response = given().contentType(ContentType.JSON).body(body).post("https://managementonschools.com/app/auth/login");
+        return response.jsonPath().getString("token");
+
+    }    public static String smsKod() {
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("FirmaId", 32);
+        body.put("Telefon", "5461127610");
+
+
+
+        Response response = given().contentType(ContentType.JSON).body(body).post("https://gateway.supergrup.com/auth/auth/testicinguvenlikoduver");
+        return response.jsonPath().getString("");
+
     }
 
 
