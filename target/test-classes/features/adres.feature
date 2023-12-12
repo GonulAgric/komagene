@@ -23,7 +23,7 @@ Feature: Adres Bilgisi Ekleme
       | Örnek Adres  | Ev        | John  | Doe   | 555-5555 | İstanbul | Beşiktaş | Levent  | Örnek Sokak |
 
 
-@negative
+@negativeadres
   Scenario: Kullanıcı tüm butonları boş bıraktığında hata mesajı görünmelidir (Olumsuz Senaryo)
     Given Verilen kullanıcı üyelik girişi yapar
     When Ve kullanıcı "Hesabım" dropdown'ından "Adreslerim" seçeneğini seçer

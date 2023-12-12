@@ -47,7 +47,7 @@ public class ÜyeOlStepDef {
             bekle(3);
             loginPage.phoneNumber.click();
 
-            loginPage.phoneNumber.sendKeys("5062949040");
+            loginPage.phoneNumber.sendKeys("5424494392");
             loginPage.girişYap.click();
             bekle(3);
         }
@@ -57,7 +57,7 @@ public class ÜyeOlStepDef {
         loginPage.ad.click();
         loginPage.ad.sendKeys("ad");
         loginPage.soyad.sendKeys("soyad");
-        loginPage.mail.sendKeys("ad.soyad@gmail.com");
+        loginPage.mail.sendKeys("ab.komgn@gmail.com");
         bekle(2);
 
     }
@@ -122,10 +122,10 @@ public class ÜyeOlStepDef {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType,"{\n" +
                 "    \"FirmaId\":32,\n" +
-                "    \"Telefon\":\"5062949040\"\n" +
+                "    \"Telefon\":\"5461127610\"\n" +
                 "}");
         Request request = new Request.Builder()
-                .url("https://gateway.supergrup.com/auth/auth/testicinguvenlikoduver")
+                .url("https://gateway.komagene.com.tr/auth/auth/testicinguvenlikoduver")
                 .method("POST",body)
                 .build();
 

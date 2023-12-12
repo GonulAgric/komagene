@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="35.395" tests="2" skipped="0" failures="1" errors="0">
+<testcase classname="Smoke Test" name="Hesaba giris yapma" time="29.764">
+<failure type="org.junit.ComparisonFailure" message="expected:&lt;[HESABIM]&gt; but was:&lt;[]&gt;">
+<![CDATA[org.junit.ComparisonFailure: expected:<[HESABIM]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinations.SmokeStepDef.hesabındaOldugunuDogrular(SmokeStepDef.java:91)
+	at ✽.Hesabında oldugunu dogrular(file:///C:/Users/hatic/IdeaProjects/komagene/src/test/resources/features/smoke.feature:10)
+]]>
+</failure>
+<system-out><![CDATA[
+Given Ana sayfaya gidilir...................................................passed
+When Üye Ol Giriş Yap butonuna tıklanır.....................................passed
+And Telefon numarası girilir................................................passed
+And Gelen dogrulama kodu girilir............................................passed
+And Giriş Yap butonuna tıklanır.............................................passed
+Then Hesabında oldugunu dogrular............................................failed
+]]></system-out>
+</testcase>
+<testcase classname="Smoke Test" name="Sepete ürün ekleme" time="5.021">
+<system-out><![CDATA[
+Given Adres secimini yapar..................................................passed
+]]></system-out>
+</testcase>
+</testsuite>

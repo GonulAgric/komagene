@@ -14,7 +14,7 @@ Feature: Üyelik Oluşturma ve Doğrulama
     Then "Hoş geldiniz" mesajı görüntülenir
     And Kullanıcı anasayfaya dön butonuna tıklar.
 
-@loginNegative
+@negatif
   Scenario: Yanlış doğrulama kodu girişi
     Given Ana sayfaya gidilir
     When "Üye Ol / Giriş Yap" butonuna tıklanır

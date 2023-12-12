@@ -1,4 +1,4 @@
-@Adres
+@Giriş
 Feature: Giriş yapma
 
   Scenario: Hesaba giris yapma
@@ -7,4 +7,4 @@ Feature: Giriş yapma
     And Telefon numarası girilir
     And Gelen dogrulama kodu girilir
     And Giriş Yap butonuna tıklanır
-    And sayfa kapatılır
+
