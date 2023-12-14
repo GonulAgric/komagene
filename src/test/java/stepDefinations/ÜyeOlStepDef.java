@@ -9,6 +9,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
@@ -168,4 +170,86 @@ public class ÜyeOlStepDef {
         bekle(3);
         loginPage.anasayfayaDön.click();
     }
+
+    @When("Ad alanina {string} girilir")
+    public void ad_alanina_girilir(String string) {
+        loginPage.ad.click();
+        loginPage.ad.sendKeys(string);
+    }
+    @Then("{string} görüntülenir")
+    public void görüntülenir(String string) {
+        Assert.assertTrue(loginPage.adBosBirakilincaUyariMesaji.getText().contains(string));
+    }
+
+    @When("Soyad alanina {string} girilir")
+    public void soyad_alanina_girilir(String string) {
+        loginPage.soyad.click();
+        loginPage.soyad.sendKeys(string);
+    }
+    @Then("Soyad {string} görüntülenir")
+    public void soyad_görüntülenir(String string) {
+        Assert.assertTrue(loginPage.soyadBosBirakilincaUyariMesaji.getText().contains(string));
+    }
+    @When("Email alanina {string} girilir")
+    public void email_alanina_girilir(String string) {
+        loginPage.mail.click();
+        loginPage.mail.sendKeys(string);
+    }
+    @Then("Email {string} görüntülenir")
+    public void email_görüntülenir(String string) {
+        Assert.assertTrue(loginPage.emailBosBirakilincaUyariMesaji.getText().contains(string));
+    }
+
+    @When("{string} numarasi girilir")
+    public void numarasi_girilir(String string) {
+            loginPage.phoneNumber.click();
+            loginPage.phoneNumber.sendKeys(string);
+            loginPage.girişYap.click();
+            bekle(2);
+        }
+
+    @Then("Telefon {string} görüntülenir")
+    public void telefon_görüntülenir(String string) {
+            ReusableMethods.windowHandle();
+            Assert.assertTrue(loginPage.telNoUyariMesaji.getText().contains(string));
+
+        }
+    @When("KVKK Metni checkbox i isaretlenmez")
+    public void kvkk_metni_checkbox_i_isaretlenmez() {
+
+    }
+    @When("Gizlilik Sözleşmesi  checkbox'i isaretlenir")
+    public void gizlilik_sözleşmesi_checkbox_i_isaretlenir() {
+        loginPage.gizlilikSözleşmesiCheckBox.click();
+    }
+    @When("Üyelik Sözleşmesi checkbox'i isaretlenir")
+    public void üyelik_sözleşmesi_checkbox_i_isaretlenir() {
+        loginPage.üyelikKosullariCheckBox.click();
+    }
+
+
+    @And("Üyeliği Tamamla butonuna tıklanır")
+    public void üyeliğiTamamlaButonunaTıklanır() {
+        loginPage.üyeligiTamamlaButton.click();
+    }
+
+    @Then("KVKK hata mesaji dogrulanir")
+    public void kvkkHataMesajiDogrulanir() {
+        ReusableMethods.windowHandle();
+       loginPage.KVKKhataMesaji.click();
+       Assert.assertTrue(loginPage.KVKKhataMesaji.getText().contains("Lütfen Kvkk bilgilendirme metinini,Üyelik koşullarını ve gizlilik sözleşmesini okuduğunuzu belirtiniz."));
+    }
+    @When("KVKK Metni checkbox i isaretlenir")
+    public void kvkk_metni_checkbox_i_isaretlenir() {
+        loginPage.kvkkcheckbox.click();
+    }
+    @When("Gizlilik Sözleşmesi  checkbox'i isaretlenmez")
+    public void gizlilik_sözleşmesi_checkbox_i_isaretlenmez() {
+
+    }
+    @When("Üyelik Sözleşmesi checkbox'i isaretlenmez")
+    public void üyelik_sözleşmesi_checkbox_i_isaretlenmez() {
+
+    }
 }
+
