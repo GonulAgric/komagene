@@ -108,12 +108,12 @@ public class ReusableMethods {
     //EXPLICIT WAIT METHODS
 
     //Visible Wait
-   public static void visibleWait(WebElement element, int sayi) {
+    public static void visibleWait(WebElement element, int sayi) {
 
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(sayi));
 
-        wait.until(ExpectedConditions.visibilityOf(element));}
-
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
 
 
     //VisibleElementLocator Wait
@@ -240,7 +240,7 @@ public class ReusableMethods {
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         String attribute_Value = (String) js.executeScript("return document.getElementById('" + id + "')." + attributeName);
         System.out.println("Attribute Value: = " + attribute_Value);
-}
+    }
 
 
     public static void clickWithJS(WebElement element) {
@@ -279,16 +279,16 @@ public class ReusableMethods {
         body.put("username", ConfigReader.getProperty("admin_username"));
 
 
-
         Response response = given().contentType(ContentType.JSON).body(body).post("https://managementonschools.com/app/auth/login");
         return response.jsonPath().getString("token");
 
-    }    public static String smsKod() {
+    }
+
+    public static String smsKod() {
 
         Map<String, Object> body = new HashMap<>();
         body.put("FirmaId", 32);
         body.put("Telefon", "5461127610");
-
 
 
         Response response = given().contentType(ContentType.JSON).body(body).post("https://gateway.supergrup.com/auth/auth/testicinguvenlikoduver");
@@ -296,10 +296,22 @@ public class ReusableMethods {
 
     }
 
-
+    public static void  windowHandle() {
+        String anaPencereHandle = Driver.getDriver().getWindowHandle();
+        // Üye ol pop-up ekranına geçiş yap
+        String mainWindowHandle = Driver.getDriver().getWindowHandle();
+        for (String handle : Driver.getDriver().getWindowHandles()) {
+            if (!handle.equals(mainWindowHandle)) {
+                Driver.getDriver().switchTo().window(handle);
+                break;
+            }
+        }
 
 
     }
+
+
+}
 
 
 

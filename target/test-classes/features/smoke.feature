@@ -15,7 +15,7 @@ Scenario:Sepete ürün ekleme
   And İkili durum menuye tiklar.
   And Opsiyon seçimlerini yapar.
   And Sepete ekle butonuna tıklar.
- # Then Kullanici urunun sepete eklendigini dogrular.
+
 
  Scenario: Odeme
     Given Kullanici sepetime tiklar.

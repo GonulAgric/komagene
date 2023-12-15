@@ -65,4 +65,18 @@ public class LoginPage {
  @FindBy(xpath = "//*[@id=\"yeniuyewarning\"]/div/div/div[2]/div/div/div/div[4]/div/button")
     public WebElement anasayfayaDön;
 
+    @FindBy(xpath = "(//span[@aria-live='polite'])[4]")
+    public WebElement adBosBirakilincaUyariMesaji;
+
+    @FindBy(xpath = "(//span[@aria-live='polite'])[5]")
+    public WebElement soyadBosBirakilincaUyariMesaji;
+
+    @FindBy(xpath = "(//span[@aria-live='polite'])[6]")
+    public WebElement emailBosBirakilincaUyariMesaji;
+
+    @FindBy(xpath = "(//div[@class='row'])[36]")
+    public WebElement telNoUyariMesaji;
+
+    @FindBy(xpath = "(//div[@class='col-md-12'])[19]")
+    public WebElement KVKKhataMesaji;
 }
