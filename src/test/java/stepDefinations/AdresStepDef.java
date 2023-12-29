@@ -1,124 +1,206 @@
 package stepDefinations;
-
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.AdresEkleme;
-import pages.LoginPage;
-import utilities.ConfigReader;
-import utilities.Driver;
+import org.junit.Assert;
+import pages.AdreslerimPage;
 import utilities.ReusableMethods;
 
 import static utilities.ReusableMethods.bekle;
-import static utilities.ReusableMethods.click;
 
 public class AdresStepDef {
-    AdresEkleme adresEkleme= new AdresEkleme();
-    LoginPage loginPage=new LoginPage();
+    AdreslerimPage adresEkleme = new AdreslerimPage();
 
-    @Given("Verilen kullanıcı üyelik girişi yapar")
-    public void verilen_kullanıcı_üyelik_girişi_yapar() {
-//        Driver.getDriver().get(ConfigReader.getProperty("url"));
-//        bekle(2);
-//        ReusableMethods.click(loginPage.uyeolButton);
-//        String anaPencereHandle = Driver.getDriver().getWindowHandle();
-//        // Üye ol pop-up ekranına geçiş yap
-//        String mainWindowHandle = Driver.getDriver().getWindowHandle();
-//        for (String handle : Driver.getDriver().getWindowHandles()) {
-//            if (!handle.equals(mainWindowHandle)) {
-//                Driver.getDriver().switchTo().window(handle);
-//                break;
-//            }
-//
-//            bekle(3);
-//            loginPage.phoneNumber.click();
-//
-//            loginPage.phoneNumber.sendKeys("5461127610");
-//            loginPage.girişYap.click();
-//            bekle(3);
-//            loginPage.dogrulama.sendKeys(" ");
-//            bekle(20);
-//            loginPage.girisYapAllert.click();
-//
-//        }
+    @When("Acilan dropdown menuden adreslerime tiklar.")
+    public void acilanDropdownMenudenAdreslerimeTiklar() {
+        bekle(2);
+        adresEkleme.adreslerimButonu.click();
     }
-    @When("Ve kullanıcı {string} dropdown'ından {string} seçeneğini seçer")
-    public void ve_kullanıcı_dropdown_ından_seçeneğini_seçer(String string, String string2) {
 
-        String mainWindowHandle = Driver.getDriver().getWindowHandle();
-        for (String handle : Driver.getDriver().getWindowHandles()) {
-            if (!handle.equals(mainWindowHandle)) {
-                Driver.getDriver().switchTo().window(handle);
-                break;
-            }
-        }
+
+    @And("Kullanici Yeni Adres Ekle butonuna tiklar")
+    public void kullaniciYeniAdresEkleButonunaTiklar() {
+        adresEkleme.yeniAdresBilgisiEkleButonu.click();
+        
+    }
+    @And("Kullanici baslik butonunu doldurur.")
+    public void kullaniciBaslikButonunuDoldurur() {
+        adresEkleme.adresBaslikButonu.sendKeys("test");
+        
+    }
+
+    @And("Kullanici adres tipi butonunu doldurur.")
+    public void kullaniciAdresTipiButonunuDoldurur() {
+        ReusableMethods.ddmIndex(adresEkleme.adresTipiButonu,1);
+        
+    }
+
+    @When("Kullanici ad  butonunu doldurur.")
+    public void kullaniciAdButonunuDoldurur() {
+        adresEkleme.adAlaniButonu.sendKeys("Gönül");
+        
+    }
+    @And("Kullanici soyad butonunu doldurur.")
+    public void kullaniciSoyadButonunuDoldurur() {
+       adresEkleme.SoyAdAlaniButonu.sendKeys("Ağrıç");
+    }
+
+    @And("Kullanici telefon alanini doldurur.")
+    public void kullaniciTelefonAlaniniDoldurur() {
+        adresEkleme.telefonAlaniButonu.sendKeys("5551126589");
+
+    }
+
+    @And("Kullanici il secer.")
+    public void kullaniciIlSecer() {
+        bekle(2);
+        ReusableMethods.ddmIndex(adresEkleme.ilDropdawn,1);
+
+    }
+
+    @And("Kullanici ilce secer.")
+    public void kullaniciIlceSecer() {
+        bekle(2);
+        ReusableMethods.ddmIndex(adresEkleme.ilceDropdawn,1);
+
+    }
+
+    @And("Kullanici mahalle secer.")
+    public void kullaniciMahalleSecer() {
+        bekle(2);
+        ReusableMethods.ddmIndex(adresEkleme.mahalleDropdawn,1);
+
+    }
+    @And("Kullanici sokak secer.")
+    public void kullaniciSokakSecer() {
+        bekle(5);
+        ReusableMethods.ddmIndex(adresEkleme.sokakDropdawn,3);
+    }
+    @And("Kullanici bina no alanini doldurur.")
+    public void kullaniciBinaNoAlaniniDoldurur() {
+        bekle(2);
+        adresEkleme.binaNo.sendKeys("1");
+
+    }
+
+    @And("Kullanici kat alanini doldurur.")
+    public void kullaniciKatAlaniniDoldurur() {
+        adresEkleme.katNo.sendKeys("2");
+    }
+
+    @And("Kullanici daire no alanini doldurur.")
+    public void kullaniciDaireNoAlaniniDoldurur() {
+        adresEkleme.daireNo.sendKeys("5");
+
+    }
+
+    @And("Kullanici Adres bilgimi kaydet butonuna tıklar")
+    public void kullaniciAdresBilgimiKaydetButonunaTıklar() {
+
+        adresEkleme.adresBilgimiKaydetButonu.click();
+    }
+
+    @Then("Kullanici yeni adresin listelendigini dogrular.")
+    public void kullaniciYeniAdresinListelendiginiDogrular() {
+    }
+
+
+    @And("Başlik alanini boş birakir.")
+    public void başlikAlaniniBoşBirakir() {
+        bekle(5);
+        adresEkleme.adresBaslikButonu.sendKeys(" ");
+
+    }
+
+    @Then("Kullanici uyari mesaji almali.")
+    public void kullaniciUyariMesajiAlmali() {
         bekle(3);
-       click(adresEkleme.hesabim);
+        adresEkleme.adresBaslikButonu.click();
+        String actualMesaj=adresEkleme.baslikAlaniHataMesaji.getText();
+        String expectedMesaj="Başlık minimum 2, maksimum 100 karakter olması gerekiyor; girdiğiniz karekter sayısı 1.";
+
+        Assert.assertEquals(expectedMesaj,actualMesaj);
     }
-    @When("kullanıcı {string} butonuna tıklar")
-    public void kullanıcı_butonuna_tıklar(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @And("Adres tipi alanini boş birakir.")
+    public void adresTipiAlaniniBoşBirakir() {
+        ReusableMethods.ddmIndex(adresEkleme.adresTipiButonu,0);
+        
     }
-    @When("O zaman bir pop-up penceresi açılır")
-    public void o_zaman_bir_pop_up_penceresi_açılır() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Then("Kullanici uyari mesaji alir.")
+    public void kullaniciUyariMesajiAlir() {
+        String actualMesaj= adresEkleme.adresTipiAlaniHataMesaji.getText();
+        String expectedMesaj= "Lütfen adres tipi seçiniz.";
+        Assert.assertEquals(expectedMesaj,actualMesaj);
     }
-    @When("Kullanici Örnek Adres butonunu doldurur.")
-    public void kullanici_örnek_adres_butonunu_doldurur() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Given("Ad butonuna {string} girilir")
+    public void adButonunaGirilir(String string) {
+        adresEkleme.adAlaniButonu.sendKeys(string);
+
     }
-    @When("Kullanici Ev butonunu doldurur.")
-    public void kullanici_ev_butonunu_doldurur() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Then("Ve {string} görüntülenir")
+    public void veGörüntülenir(String string) {
+        adresEkleme.adAlaniHataMesaji.sendKeys(string);
     }
-    @When("Kullanici John butonunu doldurur.")
-    public void kullanici_john_butonunu_doldurur() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Given("Soyad butonuna {string} girilir")
+    public void soyadButonunaGirilir(String string) {
+        adresEkleme.SoyAdAlaniButonu.sendKeys(string);
     }
-    @When("Kullanici Doe butonunu doldurur.")
-    public void kullanici_doe_butonunu_doldurur() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Then("Ve soyad {string} görüntülenir")
+    public void veSoyadGörüntülenir(String string) {
+        adresEkleme.soyadAlaniHataMesaji.sendKeys(string);
     }
-    @When("Kullanici {int}-{int} butonunu doldurur.")
-    public void kullanici_butonunu_doldurur(Integer int1, Integer int2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Given("Telefon butonuna {string} girilir")
+    public void telefonButonunaGirilir(String string) {
+        adresEkleme.telefonAlaniButonu.sendKeys(string);
+
     }
-    @When("Kullanici İstanbul butonunu doldurur.")
-    public void kullanici_istanbul_butonunu_doldurur() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Then("Ve telefon alani {string} görüntülenir")
+    public void veTelefonAlaniGörüntülenir(String string) {
+        adresEkleme.telefonAlaniHataMesaji.sendKeys(string);
     }
-    @When("Kullanici Beşiktaş butonunu doldurur.")
-    public void kullanici_beşiktaş_butonunu_doldurur() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Given("Bina No butonuna {string} girilir")
+    public void binaNoButonunaGirilir(String string) {
+        adresEkleme.binaNo.sendKeys(string);
     }
-    @When("Kullanici Levent butonunu doldurur.")
-    public void kullanici_levent_butonunu_doldurur() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+
+    @Then("bina no alani {string} görüntülenir")
+    public void binaNoAlaniGörüntülenir(String string) {
+        adresEkleme.binaNoAlaniHataMesaji.sendKeys(string);
     }
-    @When("Kullanici Örnek Sokak butonunu doldurur.")
-    public void kullanici_örnek_sokak_butonunu_doldurur() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @Given("Kullanici test baslikli adresin duzenle butonuna tiklar.")
+    public void kullaniciTestBaslikliAdresinDuzenleButonunaTiklar() {
+        adresEkleme.duzenleButonu.click();
+
     }
-    @When("Adres bilgimi kaydet butonuna tıklar")
-    public void adres_bilgimi_kaydet_butonuna_tıklar() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @When("Bilgilerde degişiklik yapar.")
+    public void bilgilerdeDegişiklikYapar() {
+        adresEkleme.adAlaniButonu.clear();
+        adresEkleme.adAlaniButonu.sendKeys("Suay");
+
     }
-    @Then("Eğer sube yoksa {string} alerti görünmelidir")
-    public void eğer_sube_yoksa_alerti_görünmelidir(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+    @And("Adres bilgimi kaydet butonuna basar.")
+    public void adresBilgimiKaydetButonunaBasar() {
+        adresEkleme.adresBilgimiGüncelle.click();
+
+    }
+
+    @Given("Kullanici sil butonuna tiklar.")
+    public void kullaniciSilButonunaTiklar() {
+        adresEkleme.sil.click();
     }
 
 }

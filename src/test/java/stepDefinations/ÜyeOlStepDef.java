@@ -9,9 +9,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import org.junit.Assert;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import pages.LoginPage;
+import pages.UyeOlPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -21,7 +19,7 @@ import java.io.IOException;
 import static utilities.ReusableMethods.bekle;
 
 public class ÜyeOlStepDef {
-    LoginPage loginPage = new LoginPage();
+    UyeOlPage loginPage = new UyeOlPage();
 
     @Given("Ana sayfaya gidilir")
     public void ana_sayfaya_gidilir() {

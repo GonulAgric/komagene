@@ -170,10 +170,10 @@ public class SmokePage {
    @FindBy(xpath = "//*[@id=\"nav-online-kredi-karti\"]/div[5]/div[2]/button")
     public WebElement siparisiTamamla ;
 
-   @FindBy(xpath = "//*[@id='code']")
+   @FindBy(xpath = "//*[@id='passwordfield']")
     public WebElement odemeDogrulama ;
 
-   @FindBy(xpath = "//button[@id='btn-commit']")
+   @FindBy(xpath = "//*[@id=\"submitbutton\"]")
     public WebElement odemeOnaylama ;
 
 

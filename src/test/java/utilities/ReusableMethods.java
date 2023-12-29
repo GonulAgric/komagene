@@ -22,6 +22,7 @@ import java.time.Duration;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertTrue;
 
 public class ReusableMethods {
 
@@ -311,7 +312,40 @@ public class ReusableMethods {
     }
 
 
+
+        public static void urlDogrulama(String text) {
+            String mainWindowHandle = Driver.getDriver().getWindowHandle();
+
+            Set<String> allWindowHandles = Driver.getDriver().getWindowHandles();
+            for (String handle : allWindowHandles) {
+                if (!handle.equals(mainWindowHandle)) {
+                    Driver.getDriver().switchTo().window(handle);
+
+                    // Sayfanın yüklenmesini bekleyin
+                    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.urlContains(text));
+
+                    assertTrue("Kullanici ilgili sayfaya yonlendirilemedi", Driver.getDriver().getCurrentUrl().contains(text));
+                    bekle(10);
+                    // Pencere kapatma
+                    Driver.getDriver().close();
+
+                    // Ana pencereye geri dön
+                    Driver.getDriver().switchTo().window(mainWindowHandle);
+                }
+            }
+        }
+
+    public static WebElement getBannerElement(String bannerId) {
+        By bannerLocator = By.id(bannerId);
+        return Driver.getDriver().findElement(bannerLocator);
+    }
+
+
 }
+
+
+
 
 
 

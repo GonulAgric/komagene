@@ -8,14 +8,14 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import pages.LoginPage;
+import pages.UyeOlPage;
 import utilities.Driver;
 import static utilities.ReusableMethods.bekle;
 import static utilities.ReusableMethods.click;
 
 
 public class GirisStepDef {
-    LoginPage loginPage = new LoginPage();
+    UyeOlPage loginPage = new UyeOlPage();
     Response response;
 
 
@@ -55,7 +55,7 @@ public class GirisStepDef {
                 "    \"Telefon\":\"5461127610\"\n" +
                 "}");
         Request request = new Request.Builder()
-                .url("https://gw.komagene.com.tr/auth/auth/testicinguvenlikoduver")
+                .url("https://gateway.komagene.com.tr/auth/auth/testicinguvenlikoduver")
                 .method("POST", body)
                 .build();
 

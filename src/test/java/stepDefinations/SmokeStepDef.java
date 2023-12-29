@@ -12,83 +12,26 @@ import okhttp3.RequestBody;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import pages.LoginPage;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.UyeOlPage;
 import pages.SmokePage;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
 import java.io.IOException;
+import java.time.Duration;
 
+import static io.restassured.RestAssured.given;
 import static utilities.ReusableMethods.bekle;
 import static utilities.ReusableMethods.click;
 
 public class SmokeStepDef {
 
-    LoginPage loginPage = new LoginPage();
+    UyeOlPage loginPage = new UyeOlPage();
     SmokePage smokePage = new SmokePage();
     Response response;
-
-
-//    @When("Üye Ol Giriş Yap butonuna tıklanır")
-//    public void üyeOlGirişYapButonunaTıklanır() {
-//        click(loginPage.uyeolButton);
-//    }
-//
-//    @And("Telefon numarası girilir")
-//    public void telefonNumarasıGirilir() {
-//
-//        // Üye ol pop-up ekranına geçiş yap
-//        String mainWindowHandle = Driver.getDriver().getWindowHandle();
-//        for (String handle : Driver.getDriver().getWindowHandles()) {
-//            if (!handle.equals(mainWindowHandle)) {
-//                Driver.getDriver().switchTo().window(handle);
-//                break;
-//            }
-//
-//            bekle(3);
-//            loginPage.phoneNumber.click();
-//
-//            loginPage.phoneNumber.sendKeys("5461127610");
-//            loginPage.girişYap.click();
-//            bekle(3);
-//        }
-//    }
-//
-//
-//    @And("Gelen dogrulama kodu girilir")
-//    public void gelenDogrulamaKoduGirilir() throws IOException {
-//
-//        OkHttpClient client = new OkHttpClient();
-//        MediaType mediaType = MediaType.parse("application/json");
-//        RequestBody body = RequestBody.create(mediaType, "{\n" +
-//                "    \"FirmaId\":32,\n" +
-//                "    \"Telefon\":\"5461127610\"\n" +
-//                "}");
-//        Request request = new Request.Builder()
-//                .url("https://gw.komagene.com.tr/auth/auth/testicinguvenlikoduver")
-//                .method("POST", body)
-//                .build();
-//
-//        okhttp3.Response response = client.newCall(request).execute();
-//
-//        int statusCode = response.code();
-//        String responseBody = response.body().string();
-//
-//        System.out.println("Status Code: " + statusCode);
-//        System.out.println("Response Body: " + responseBody);
-//
-//        bekle(5);
-//        loginPage.dogrulama.sendKeys(responseBody);
-//    }
-//
-//
-//    @When("Giriş Yap butonuna tıklanır")
-//    public void girişYapButonunaTıklanır() {
-//        loginPage.girisYapAllert.click();
-//
-//    }
 
     @Then("Hesabında oldugunu dogrular")
     public void hesabındaOldugunuDogrular() {
@@ -107,9 +50,10 @@ public class SmokeStepDef {
             ReusableMethods.scroll(smokePage.tugayYoluSube);
             click(smokePage.tugayYoluSube);
             smokePage.seciliAdresleDevam.click();
+        } else {
+            smokePage.maltepaBaglarbasiSube.click();
         }
-        else {smokePage.maltepaMeydanSube.click();}
-
+        smokePage.seciliAdresleDevam.click();
 
     }
 
@@ -127,71 +71,72 @@ public class SmokeStepDef {
 
     }
 
-   @And("Opsiyon seçimlerini yapar.")
+    @And("Opsiyon seçimlerini yapar.")
     public void opsiyonSeçimleriniYapar() {
 
-       bekle(10);
-       click(smokePage.AciSecimi);
-       bekle(5);
-       click(smokePage.doritosSecimi);
-       bekle(10);
-      click(smokePage.extraMalzemeIstemiyorum);
-      bekle(3);
-      ReusableMethods.scroll(smokePage.lavasSecimi);
-      bekle(3);
-      click(smokePage.lavasSecimi);
-      bekle(3);
-      click(smokePage.extraLavasIstemiyorum);
-      bekle(3);
-      ReusableMethods.scroll(smokePage.garniturSecimi);
-      bekle(3);
-      click(smokePage.garniturSecimi);
-      ReusableMethods.scroll(smokePage.sosSecimi);
-       bekle(3);
-      click(smokePage.sosSecimi);
-      ReusableMethods.scroll(smokePage.ikinciAciSecimi);
-      bekle(5);
-      click(smokePage.ikinciAciSecimi);
-      bekle(3);
-      click(smokePage.ikincidoritosSecimi);
-      bekle(3);
-      click(smokePage.ikinciextraMalzemeIstemiyorum);
-      bekle(3);
-      click(smokePage.ikinciLavasSecimi);
-      bekle(3);
-      smokePage.ikinciLavasIstemiyorum.click();
-      bekle(2);
-      smokePage.ikinciGarniturSecimi.click();
-      bekle(2);
-      smokePage.ikinciSosSecimi.click();
-      bekle(2);
-      smokePage.icecekSecimi.click();
-      bekle(2);
-      smokePage.komageneAyran.click();
-      bekle(2);
-      smokePage.ikinciicecekSecimi.click();
-      bekle(2);
-      smokePage.ikinciAyran.click();
-      bekle(2);
-      smokePage.pepsiPromosyonSecimi.click();
-      bekle(2);
-      click(smokePage.pepsiPromosyonIstemiyorum);
-      bekle(2);
-      smokePage.redbullPromosyonSecimi.click();
-      bekle(2);
-      smokePage.redbullPromosyonIstemiyorum.click();
-   }
+        bekle(10);
+        click(smokePage.AciSecimi);
+        bekle(5);
+        click(smokePage.doritosSecimi);
+        bekle(10);
+        click(smokePage.extraMalzemeIstemiyorum);
+        bekle(3);
+        ReusableMethods.scroll(smokePage.lavasSecimi);
+        bekle(3);
+        click(smokePage.lavasSecimi);
+        bekle(3);
+        click(smokePage.extraLavasIstemiyorum);
+        bekle(3);
+        ReusableMethods.scroll(smokePage.garniturSecimi);
+        bekle(3);
+        click(smokePage.garniturSecimi);
+        ReusableMethods.scroll(smokePage.sosSecimi);
+        bekle(3);
+        click(smokePage.sosSecimi);
+        ReusableMethods.scroll(smokePage.ikinciAciSecimi);
+        bekle(5);
+        click(smokePage.ikinciAciSecimi);
+        bekle(3);
+        click(smokePage.ikincidoritosSecimi);
+        bekle(3);
+        click(smokePage.ikinciextraMalzemeIstemiyorum);
+        bekle(3);
+        click(smokePage.ikinciLavasSecimi);
+        bekle(3);
+        smokePage.ikinciLavasIstemiyorum.click();
+        bekle(2);
+        smokePage.ikinciGarniturSecimi.click();
+        bekle(2);
+        smokePage.ikinciSosSecimi.click();
+        bekle(2);
+        smokePage.icecekSecimi.click();
+        bekle(2);
+        smokePage.komageneAyran.click();
+        bekle(2);
+        smokePage.ikinciicecekSecimi.click();
+        bekle(2);
+        smokePage.ikinciAyran.click();
+        bekle(2);
+        smokePage.pepsiPromosyonSecimi.click();
+        bekle(2);
+        click(smokePage.pepsiPromosyonIstemiyorum);
+        bekle(2);
+        smokePage.redbullPromosyonSecimi.click();
+        bekle(2);
+        smokePage.redbullPromosyonIstemiyorum.click();
+    }
 
 
     @And("Sepete ekle butonuna tıklar.")
     public void sepeteEkleButonunaTıklar() {
         bekle(5);
-     click(   smokePage.sepeteEkleButtonu);
+        click(smokePage.sepeteEkleButtonu);
     }
+
     @Given("Kullanici sepetime tiklar.")
     public void kullaniciSepetimeTiklar() {
 
-        bekle(10);
+        ReusableMethods.visibleWait(smokePage.sepetim, 10);
         click(smokePage.sepetim);
     }
 
@@ -213,8 +158,8 @@ public class SmokeStepDef {
     public void kartBilgileriniGirer() {
         smokePage.saklıKArtBilgilerimiKul.click();
         Select dropdown = new Select(smokePage.odemeKArtıDropdown);
-       dropdown.selectByIndex(1);
-       bekle(2);
+        dropdown.selectByIndex(3);
+        bekle(2);
 
     }
 
@@ -226,39 +171,54 @@ public class SmokeStepDef {
     @And("Siparisi tamamla butonuna tiklar.")
     public void siparisiTamamlaButonunaTiklar() {
         smokePage.siparisiTamamla.click();
-        bekle(3);
+        bekle(10);
         WebElement odemeiframeElement = Driver.getDriver().findElement(By.id("ucDHtml"));
         Driver.getDriver().switchTo().frame(odemeiframeElement);
-        }
+    }
 
     @And("Odeme için telefona gelen dogrulama kodunu girer.")
     public void odemeIçinTelefonaGelenDogrulamaKodunuGirer() throws IOException {
-
-        OkHttpClient client = new OkHttpClient();
+        bekle(10);
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\n" +
-                "    \"FirmaId\":32,\n" +
-                "    \"Telefon\":\"5368411169\"\n" +
-                "}");
+        RequestBody body = RequestBody.create(mediaType, "{\r\n    \"Telefon\": \"5368411169\",\r\n    \"FirmaId\": \"32\"\r\n}");
         Request request = new Request.Builder()
-                .url("https://gw.komagene.com.tr/auth/auth/testicinguvenlikoduver")
+                .url("https://gateway.komagene.com.tr/auth/auth/smskodugonder")
                 .method("POST", body)
+                .addHeader("firmaid", "32")
+                .addHeader("anonymousclientid", "91a21a36-e694-4291-b919-9c36b06d189d")
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Cookie", "NSC_ESNS=16c8bca6-9e61-1578-9678-00505698d0f6_2911666953_1195167698_00000000004676674122")
                 .build();
 
-        okhttp3.Response response = client.newCall(request).execute();
+        try {
+            okhttp3.Response response = client.newCall(request).execute();
+            int statusCode = response.code();
+            String responseBody = response.body().string();
 
-        int statusCode = response.code();
-        String responseBody = response.body().string();
+            System.out.println("Status Code: " + statusCode);
+            System.out.println("Response Body: " + responseBody);
 
-        System.out.println("Status Code: " + statusCode);
-        System.out.println("Response Body: " + responseBody);
+            // Doğrulama kodunu temizle
+            String cleanCode = responseBody.replaceAll("[^0-9]", "");
 
-        bekle(5);
-        smokePage.odemeDogrulama.sendKeys(responseBody);
-        bekle(10);
-        smokePage.odemeDogrulama.click();
-        smokePage.odemeOnaylama.click();
-        Driver.getDriver().switchTo().defaultContent();
+            // Elementin etkileşimli olduğundan emin ol
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.elementToBeClickable(smokePage.odemeDogrulama));
+
+            // Doğrulama kodunu elemente yaz
+            smokePage.odemeDogrulama.click();
+            smokePage.odemeDogrulama.sendKeys(cleanCode);
+
+            bekle(10);
+
+            // Elemente tıklama işlemleri
+
+            smokePage.odemeOnaylama.click();
+            Driver.getDriver().switchTo().defaultContent();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
 }
+
