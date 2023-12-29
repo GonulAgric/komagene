@@ -1,28 +1,48 @@
 pipeline {
     agent any
 
+    options {
+        buildDiscarder(logRotator(artifactNumToKeepStr: '1', numToKeepStr: '5'))
+    }
+
+    environment {
+        WORKSPACE = pwd()
+    }
+
+    tools {
+        maven 'MavenToolName' // MavenToolName, Jenkins yükleminizde tanımlı olan Maven aracının adı olmalıdır.
+    }
+
     parameters {
         string(name: 'SPEC', defaultValue: "komagene/src/test/resources/features/smoke.feature", description: "Enter the feature file for execution")
         choice(name: 'BROWSER', choices:['chrome', 'firefox', 'edge'], description: "Choose the browser to execute")
     }
 
     stages {
-        stage('Building') {
+        stage('Checkout') {
             steps {
-                echo "Building the application"
-                // Burada projenizi derlemek için gerekli adımları ekleyebilirsiniz.
-                // Örneğin: sh "mvn clean install"
+                checkout scm
             }
         }
 
-        stage('Testing') {
+        stage('Build') {
             steps {
-                script {
-                    echo "Running Maven Install"
-                    sh "mvn clean install"
+                dir("${WORKSPACE}/komagene") {
+                    script {
+                        echo "Building the application"
+                        sh "mvn clean install"
+                    }
+                }
+            }
+        }
 
-                    echo "Running Cucumber Tests"
-                    sh "npx cucumber-js --browser ${BROWSER} --spec ${SPEC}"
+        stage('Test') {
+            steps {
+                dir("${WORKSPACE}/komagene") {
+                    script {
+                        echo "Running Cucumber Tests"
+                        sh "npx cucumber-js --browser ${BROWSER} --spec ${SPEC}"
+                    }
                 }
             }
         }
@@ -30,7 +50,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Application deployed"
-                // Burada uygulamanızın dağıtımı için gerekli adımları ekleyebilirsiniz.
             }
         }
     }
