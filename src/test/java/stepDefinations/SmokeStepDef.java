@@ -20,8 +20,10 @@ import pages.SmokePage;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static utilities.ReusableMethods.bekle;
@@ -44,18 +46,34 @@ public class SmokeStepDef {
         bekle(2);
         smokePage.adresSecimAlani.click();
         smokePage.kayitliAdreslerimTest.click();
-        bekle(3);
+        List<WebElement> subeler = smokePage.subeList;
 
-        if (smokePage.tugayYoluSube.getText().contains("AÇIK")) {
-            ReusableMethods.scroll(smokePage.tugayYoluSube);
-            click(smokePage.tugayYoluSube);
-            smokePage.seciliAdresleDevam.click();
-        } else {
-            smokePage.maltepaBaglarbasiSube.click();
+        for (WebElement sube : subeler) {
+            // AÇIK durumunu kontrol et
+            List<WebElement> acikDurumElementList = sube.findElements(By.xpath(".//p[contains(text(),'AÇIK')]"));
+
+            if (!acikDurumElementList.isEmpty() && acikDurumElementList.get(0).isDisplayed()) {
+                WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
+                subeAdiElement.click();
+                System.out.println("Açık olan şube tıklandı: " + subeAdiElement.getText());
+                break;  // Açık olan şubeyi bulduk, döngüden çık
+            }
+
+            // AÇIK bulunamazsa GEL AL durumunu kontrol et
+            List<WebElement> gelAlElementList = sube.findElements(By.xpath(".//p[contains(text(),'SADECE GEL AL')]"));
+
+            if (!gelAlElementList.isEmpty() && gelAlElementList.get(0).isDisplayed()) {
+                WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
+                subeAdiElement.click();
+                System.out.println("Gel Al şube tıklandı: " + subeAdiElement.getText());
+                break;  // Gel Al olan şubeyi bulduk, döngüden çık
+            }
         }
         smokePage.seciliAdresleDevam.click();
-
     }
+
+
+
 
     @When("Kullanici Bi cift tatli menuye tiklar.")
     public void kullaniciBiCiftTatliMenuyeTiklar() {

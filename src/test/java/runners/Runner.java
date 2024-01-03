@@ -15,11 +15,11 @@ import org.junit.runner.RunWith;
         monochrome = true,
         features = "src/test/resources/features",
         glue = {"stepDefinations"},
-        dryRun = true,
+        dryRun = false,
 
 
 
-        tags = "@smoke"
+        tags = "@Giriş"
 
 
 )

@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
+
 public class SmokePage {
 
     public SmokePage() {
@@ -175,6 +177,9 @@ public class SmokePage {
 
    @FindBy(xpath = "//*[@id=\"submitbutton\"]")
     public WebElement odemeOnaylama ;
+
+    @FindBy(xpath = "//div[@class='row subeListItem']")
+    public List<WebElement> subeList;
 
 
 }

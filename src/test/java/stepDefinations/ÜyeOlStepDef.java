@@ -28,7 +28,7 @@ public class ÜyeOlStepDef {
     }
     @When("{string} butonuna tıklanır")
     public void butonuna_tıklanır(String string) {
-        bekle(2);
+        ReusableMethods.visibleWait(loginPage.uyeolButton,2);
         ReusableMethods.click(loginPage.uyeolButton);
 
 

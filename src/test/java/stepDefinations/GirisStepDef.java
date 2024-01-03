@@ -55,7 +55,7 @@ public class GirisStepDef {
                 "    \"Telefon\":\"5461127610\"\n" +
                 "}");
         Request request = new Request.Builder()
-                .url("https://gateway.komagene.com.tr/auth/auth/testicinguvenlikoduver")
+                .url("https://gw.komagene.com.tr/auth/auth/testicinguvenlikoduver")
                 .method("POST", body)
                 .build();
 
