@@ -8,6 +8,7 @@ import pages.AdreslerimPage;
 import utilities.ReusableMethods;
 
 import static utilities.ReusableMethods.bekle;
+import static utilities.ReusableMethods.click;
 
 public class AdresStepDef {
     AdreslerimPage adresEkleme = new AdreslerimPage();
@@ -21,7 +22,8 @@ public class AdresStepDef {
 
     @And("Kullanici Yeni Adres Ekle butonuna tiklar")
     public void kullaniciYeniAdresEkleButonunaTiklar() {
-        adresEkleme.yeniAdresBilgisiEkleButonu.click();
+       ReusableMethods.visibleWait(adresEkleme.yeniAdresBilgisiEkleButonu,5);
+        click(adresEkleme.yeniAdresBilgisiEkleButonu);
         
     }
     @And("Kullanici baslik butonunu doldurur.")
@@ -200,7 +202,11 @@ public class AdresStepDef {
 
     @Given("Kullanici sil butonuna tiklar.")
     public void kullaniciSilButonunaTiklar() {
-        adresEkleme.sil.click();
+        ReusableMethods.visibleWait(adresEkleme.sil,5);
+        click(adresEkleme.sil);
     }
 
+    @Then("bina no{string} goruntulenir.")
+    public void binaNoGoruntulenir(String arg0) {
+    }
 }

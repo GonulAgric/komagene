@@ -11,8 +11,8 @@ Feature:Smoke Test
 
 Scenario:Sepete ürün ekleme
   Given Adres secimini yapar.
-  When Kullanici Bi cift tatli menuye tiklar.
-  And İkili durum menuye tiklar.
+  When Kullanici Dürümler kategorisine tiklar.
+  And Cigkofte durume menuye tiklar.
   And Opsiyon seçimlerini yapar.
   And Sepete ekle butonuna tıklar.
 

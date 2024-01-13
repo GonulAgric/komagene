@@ -8,10 +8,11 @@ Feature: Adres Bilgisi Ekleme
     And Giriş Yap butonuna tıklanır
     Given Kullanici hesabim butonuna tiklar.
     When Acilan dropdown menuden adreslerime tiklar.
-    And  Kullanici Yeni Adres Ekle butonuna tiklar
+
 
 
   Scenario: : Kullanıcı yeni adres bilgisi ekler
+    And  Kullanici Yeni Adres Ekle butonuna tiklar
     And  Kullanici baslik butonunu doldurur.
     And  Kullanici adres tipi butonunu doldurur.
     When Kullanici ad  butonunu doldurur.
@@ -29,6 +30,7 @@ Feature: Adres Bilgisi Ekleme
 
 
 Scenario: Başlık alanı boş bırakıldığında hata mesajı alınmalı.
+  And  Kullanici Yeni Adres Ekle butonuna tiklar
    And  Başlik alanini boş birakir.
    Then Kullanici uyari mesaji almali.
 
@@ -38,6 +40,7 @@ Scenario: Başlık alanı boş bırakıldığında hata mesajı alınmalı.
 
 
 Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
+  And  Kullanici Yeni Adres Ekle butonuna tiklar
   And  Kullanici baslik butonunu doldurur.
   And  Adres tipi alanini boş birakir.
   When Kullanici ad  butonunu doldurur.
@@ -55,7 +58,7 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 
 
   Scenario: Kullanıcı kayıtlı adresi güncelleyebilmeli.
-
+    And  Kullanici Yeni Adres Ekle butonuna tiklar
     Given Kullanici test baslikli adresin duzenle butonuna tiklar.
     When  Bilgilerde degişiklik yapar.
     And   Adres bilgimi kaydet butonuna basar.
@@ -63,6 +66,7 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 
 
   Scenario Outline: Ad alanina geçersiz veriler girildiğinde hata mesajı alınmalı
+  And  Kullanici Yeni Adres Ekle butonuna tiklar
   Given Ad butonuna "<gecersiz_veri>" girilir
   Then  Ve "<hata_mesaji>" görüntülenir
   Examples:
@@ -75,6 +79,7 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 
 
   Scenario Outline: Soyad alanina geçersiz veriler girildiğinde hata mesajı alınmalı
+    And  Kullanici Yeni Adres Ekle butonuna tiklar
     Given Soyad butonuna "<gecersiz_veri>" girilir
     Then  Ve soyad "<hata_mesaji>" görüntülenir
     Examples:
@@ -87,6 +92,7 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 
 
   Scenario Outline: Telefon alanina geçersiz veriler girildiğinde hata mesajı alınmalı
+    And  Kullanici Yeni Adres Ekle butonuna tiklar
     Given Telefon butonuna "<gecersiz_veri>" girilir
     Then  Ve telefon alani "<hata_mesaji>" görüntülenir
     Examples:

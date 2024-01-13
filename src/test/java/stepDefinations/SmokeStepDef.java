@@ -41,51 +41,63 @@ public class SmokeStepDef {
         Assert.assertEquals("HESABIM", smokePage.hesabim.getText());
     }
 
-    @Given("Adres secimini yapar.")
+   @Given("Adres secimini yapar.")
     public void adresSeciminiYapar() {
-        bekle(2);
+
+    bekle(2);
         smokePage.adresSecimAlani.click();
         smokePage.kayitliAdreslerimTest.click();
-        List<WebElement> subeler = smokePage.subeList;
+    List<WebElement> subeler = smokePage.subeList;
+
+    boolean acikSubeSecildi = false;
 
         for (WebElement sube : subeler) {
-            // AÇIK durumunu kontrol et
-            List<WebElement> acikDurumElementList = sube.findElements(By.xpath(".//p[contains(text(),'AÇIK')]"));
+        // AÇIK durumunu kontrol et
+        List<WebElement> acikDurumElementList = sube.findElements(By.xpath(".//p[contains(text(),'AÇIK')]"));
 
-            if (!acikDurumElementList.isEmpty() && acikDurumElementList.get(0).isDisplayed()) {
-                WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
-                subeAdiElement.click();
-                System.out.println("Açık olan şube tıklandı: " + subeAdiElement.getText());
-                break;  // Açık olan şubeyi bulduk, döngüden çık
-            }
-
-            // AÇIK bulunamazsa GEL AL durumunu kontrol et
-            List<WebElement> gelAlElementList = sube.findElements(By.xpath(".//p[contains(text(),'SADECE GEL AL')]"));
-
-            if (!gelAlElementList.isEmpty() && gelAlElementList.get(0).isDisplayed()) {
-                WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
-                subeAdiElement.click();
-                System.out.println("Gel Al şube tıklandı: " + subeAdiElement.getText());
-                break;  // Gel Al olan şubeyi bulduk, döngüden çık
-            }
+        if (!acikDurumElementList.isEmpty() && acikDurumElementList.get(0).isDisplayed()) {
+            WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
+            subeAdiElement.click();
+            System.out.println("Açık olan şube tıklandı: " + subeAdiElement.getText());
+            acikSubeSecildi = true;
+            break;  // Açık olan şubeyi bulduk, döngüden çık
         }
+
+        // AÇIK bulunamazsa GEL AL durumunu kontrol et
+        List<WebElement> gelAlElementList = sube.findElements(By.xpath(".//p[contains(text(),'SADECE GEL AL')]"));
+
+        if (!gelAlElementList.isEmpty() && gelAlElementList.get(0).isDisplayed()) {
+            WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
+            subeAdiElement.click();
+            System.out.println("Gel Al şube tıklandı: " + subeAdiElement.getText());
+            break;  // Gel Al olan şubeyi bulduk, döngüden çık
+        }
+    }
+
+        if (!acikSubeSecildi) {
+        System.out.println("Uyarı: Açık veya Gel Al şube bulunamadı. Subeler kapalı.");
+        // Burada başka bir aksiyon veya hata durumunu ele alma kodu ekleyebilirsiniz.
+    }
+
         smokePage.seciliAdresleDevam.click();
+}
+
+
+
+
+    @When("Kullanici Dürümler kategorisine tiklar.")
+    public void kullaniciDürümlerKategorisineTiklar() {
+
+        ReusableMethods.scroll(smokePage.durumler);
+        bekle(2);
+        click(smokePage.durumler);
     }
 
+    @And("Cigkofte durume menuye tiklar.")
+    public void cigkofteDurumeMenuyeTiklar() {
 
-
-
-    @When("Kullanici Bi cift tatli menuye tiklar.")
-    public void kullaniciBiCiftTatliMenuyeTiklar() {
-        ReusableMethods.scroll(smokePage.biCiftTatliMenu);
         bekle(2);
-        click(smokePage.biCiftTatliMenu);
-    }
-
-    @And("İkili durum menuye tiklar.")
-    public void ikiliDurumMenuyeTiklar() {
-        bekle(2);
-        smokePage.ikiliDurumMenu.click();
+        smokePage.CigKoftedurum.click();
 
     }
 
@@ -111,37 +123,16 @@ public class SmokeStepDef {
         ReusableMethods.scroll(smokePage.sosSecimi);
         bekle(3);
         click(smokePage.sosSecimi);
-        ReusableMethods.scroll(smokePage.ikinciAciSecimi);
+        click(smokePage.yanindaIyiGider);
         bekle(5);
-        click(smokePage.ikinciAciSecimi);
-        bekle(3);
-        click(smokePage.ikincidoritosSecimi);
-        bekle(3);
-        click(smokePage.ikinciextraMalzemeIstemiyorum);
-        bekle(3);
-        click(smokePage.ikinciLavasSecimi);
-        bekle(3);
-        smokePage.ikinciLavasIstemiyorum.click();
+        click(smokePage.icecekIstemiyorum);
         bekle(2);
-        smokePage.ikinciGarniturSecimi.click();
-        bekle(2);
-        smokePage.ikinciSosSecimi.click();
-        bekle(2);
-        smokePage.icecekSecimi.click();
-        bekle(2);
-        smokePage.komageneAyran.click();
-        bekle(2);
-        smokePage.ikinciicecekSecimi.click();
-        bekle(2);
-        smokePage.ikinciAyran.click();
-        bekle(2);
-        smokePage.pepsiPromosyonSecimi.click();
+        click(  smokePage.pepsiPromosyonSecimi);
         bekle(2);
         click(smokePage.pepsiPromosyonIstemiyorum);
         bekle(2);
-        smokePage.redbullPromosyonSecimi.click();
-        bekle(2);
-        smokePage.redbullPromosyonIstemiyorum.click();
+
+
     }
 
 
@@ -176,7 +167,7 @@ public class SmokeStepDef {
     public void kartBilgileriniGirer() {
         smokePage.saklıKArtBilgilerimiKul.click();
         Select dropdown = new Select(smokePage.odemeKArtıDropdown);
-        dropdown.selectByIndex(3);
+        dropdown.selectByIndex(1);
         bekle(2);
 
     }
@@ -238,5 +229,9 @@ public class SmokeStepDef {
             e.printStackTrace();
         }
     }
+
+
+
+
 }
 

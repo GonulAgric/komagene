@@ -15,7 +15,7 @@ public class SmokePage {
     @FindBy(xpath = "(//div[@class='hesabim-btn'])[2]")
     public WebElement hesabim;
 
-    @FindBy(xpath = "//*[@id=\"yazi\"]")
+    @FindBy(xpath = "//*[@id='yazi']")
     public WebElement adresSecimAlani;
 
     @FindBy(id = "addressListItem74075")
@@ -43,16 +43,16 @@ public class SmokePage {
   @FindBy(xpath = "(//*[@class='d-block w-100'])[1]")
     public WebElement AciSecimi ;
 
-  @FindBy(xpath= "(//div[@type='button'])[6]")
+  @FindBy(xpath= "(//div[@type='button'])[5]")
     public WebElement doritosSecimi ;
 
-  @FindBy(xpath = "(//*[@type='radio'])[5]")
+  @FindBy(xpath = "(//*[@type='radio'])[4]")
     public WebElement extraMalzemeIstemiyorum ;
 
-  @FindBy(xpath = "(//div[@type='button'])[7]")
+  @FindBy(xpath = "(//div[@type='button'])[6]")
     public WebElement lavasSecimi ;
 
-  @FindBy(xpath = "(//*[@type='radio'])[8]")
+  @FindBy(xpath = "(//*[@type='radio'])[7]")
     public WebElement extraLavasIstemiyorum ;
 
   @FindBy(xpath = "(//*[@class='labelCheckBox'])[1]")
@@ -94,17 +94,17 @@ public class SmokePage {
   @FindBy(xpath = "(//*[@type='radio'])[27]")
     public WebElement ikinciAyran ;
 
-  @FindBy(xpath = "(//div[@type='button'])[13]")
+  @FindBy(xpath = "(//div[@type='button'])[8]")
     public WebElement pepsiPromosyonSecimi ;
 
-  @FindBy(xpath = "(//*[@type='radio'])[35]")
+  @FindBy(xpath = "(//*[@type='radio'])[9]")
     public WebElement pepsiPromosyonIstemiyorum ;
 
-  @FindBy(xpath = "(//div[@type='button'])[14]")
-    public WebElement redbullPromosyonSecimi ;
+  @FindBy(xpath = "(//div[@type='button'])[7]")
+    public WebElement yanindaIyiGider ;
 
-  @FindBy(xpath = "(//*[@type='radio'])[38]")
-    public WebElement redbullPromosyonIstemiyorum ;
+  @FindBy(xpath = "//*[@id='drpchk**22c6dce9-f606-45e0-c6f9-d3cf5eacb75e**124279d1-3f35-4c3c-baa9-16c67a165716**1**296a5f99-9ac7-4727-9c17-7bd185c2ec0e']")
+    public WebElement icecekIstemiyorum ;
 
   @FindBy(id = "btnSepeteEkle")
     public WebElement sepeteEkleButtonu ;

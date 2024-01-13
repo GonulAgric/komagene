@@ -105,7 +105,7 @@ public class AdreslerimPage {
     public WebElement adresBilgimiGüncelle;
 
 
-    @FindBy(xpath = "(//*[@id=\"btnAdresSil\"])[1]")
+    @FindBy(xpath = "(//*[@id='btnAdresSil'])[1]")
     public WebElement sil;
 
 
