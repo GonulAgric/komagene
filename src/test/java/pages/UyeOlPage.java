@@ -27,7 +27,7 @@ public class UyeOlPage {
        public WebElement mail;
 
    @FindBy(xpath="//*[@id=\"phoneEntryForm\"]/div/div/div[2]/div[3]/div[2]/button")
-       public WebElement girişYap;
+       public WebElement girisYap;
 
    @FindBy(xpath="//*[@id=\"registerForm\"]/div/div/div[2]/div[3]/div/div/label/span")
        public WebElement kvkkcheckbox;

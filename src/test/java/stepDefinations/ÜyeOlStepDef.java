@@ -48,7 +48,7 @@ public class ÜyeOlStepDef {
             loginPage.phoneNumber.click();
 
             loginPage.phoneNumber.sendKeys("5424494392");
-            loginPage.girişYap.click();
+            loginPage.girisYap.click();
             bekle(3);
         }
     }
@@ -158,7 +158,7 @@ public class ÜyeOlStepDef {
             loginPage.phoneNumber.click();
 
             loginPage.phoneNumber.sendKeys("54611276");
-            loginPage.girişYap.click();
+            loginPage.girisYap.click();
             bekle(3);
         }
     }
@@ -202,7 +202,7 @@ public class ÜyeOlStepDef {
     public void numarasi_girilir(String string) {
             loginPage.phoneNumber.click();
             loginPage.phoneNumber.sendKeys(string);
-            loginPage.girişYap.click();
+            loginPage.girisYap.click();
             bekle(2);
         }
 

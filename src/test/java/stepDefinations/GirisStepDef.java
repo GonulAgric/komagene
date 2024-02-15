@@ -2,7 +2,7 @@ package stepDefinations;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
-import io.restassured.response.Response;
+
 import java.io.IOException;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -15,13 +15,11 @@ import static utilities.ReusableMethods.click;
 
 
 public class GirisStepDef {
-    UyeOlPage loginPage = new UyeOlPage();
-    Response response;
-
+    UyeOlPage uyeOlPage = new UyeOlPage();
 
     @When("Üye Ol Giriş Yap butonuna tıklanır")
     public void üyeOlGirişYapButonunaTıklanır() {
-        click(loginPage.uyeolButton);
+        click(uyeOlPage.uyeolButton);
     }
 
     @And("Telefon numarası girilir")
@@ -36,10 +34,10 @@ public class GirisStepDef {
             }
 
             bekle(3);
-            loginPage.phoneNumber.click();
+            uyeOlPage.phoneNumber.click();
 
-            loginPage.phoneNumber.sendKeys("5461127610");
-            loginPage.girişYap.click();
+            uyeOlPage.phoneNumber.sendKeys("5461127610");
+            uyeOlPage.girisYap.click();
             bekle(3);
         }
     }
@@ -68,14 +66,14 @@ public class GirisStepDef {
         System.out.println("Response Body: " + responseBody);
 
         bekle(5);
-        loginPage.dogrulama.sendKeys(responseBody);
+        uyeOlPage.dogrulama.sendKeys(responseBody);
        // loginPage.girisYapAllert.click();
     }
 
 
     @When("Giriş Yap butonuna tıklanır")
     public void girişYapButonunaTıklanır() {
-        loginPage.girisYapAllert.click();
+        uyeOlPage.girisYapAllert.click();
 
     }
 
