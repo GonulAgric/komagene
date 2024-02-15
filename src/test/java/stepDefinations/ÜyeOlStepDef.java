@@ -30,8 +30,6 @@ public class ÜyeOlStepDef {
     public void butonuna_tıklanır(String string) {
         ReusableMethods.visibleWait(loginPage.uyeolButton,2);
         ReusableMethods.click(loginPage.uyeolButton);
-
-
     }
     @When("Bir telefon numarası girilir")
     public void bir_telefon_numarası_girilir() {
