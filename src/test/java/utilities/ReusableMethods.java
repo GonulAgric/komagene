@@ -120,9 +120,6 @@ public class ReusableMethods {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
-
-
-
     //VisibleElementLocator Wait
     public static WebElement visibleWait(By locator, int sayi) {
 
