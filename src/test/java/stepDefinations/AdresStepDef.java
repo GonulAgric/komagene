@@ -4,7 +4,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import pages.AdreslerimPage;
+import utilities.Driver;
 import utilities.ReusableMethods;
 
 import static utilities.ReusableMethods.bekle;
@@ -20,32 +24,34 @@ public class AdresStepDef {
     }
 
 
-    @And("Kullanici Yeni Adres Ekle butonuna tiklar")
+    @When("Kullanici Yeni Adres Ekle butonuna tiklar")
     public void kullaniciYeniAdresEkleButonunaTiklar() {
-       ReusableMethods.visibleWait(adresEkleme.yeniAdresBilgisiEkleButonu,5);
+        ReusableMethods.visibleWait(adresEkleme.yeniAdresBilgisiEkleButonu, 5);
         click(adresEkleme.yeniAdresBilgisiEkleButonu);
-        
+
     }
+
     @And("Kullanici baslik butonunu doldurur.")
     public void kullaniciBaslikButonunuDoldurur() {
         adresEkleme.adresBaslikButonu.sendKeys("test");
-        
+
     }
 
     @And("Kullanici adres tipi butonunu doldurur.")
     public void kullaniciAdresTipiButonunuDoldurur() {
-        ReusableMethods.ddmIndex(adresEkleme.adresTipiButonu,1);
-        
+        ReusableMethods.ddmIndex(adresEkleme.adresTipiButonu, 1);
+
     }
 
     @When("Kullanici ad  butonunu doldurur.")
     public void kullaniciAdButonunuDoldurur() {
         adresEkleme.adAlaniButonu.sendKeys("Gönül");
-        
+
     }
+
     @And("Kullanici soyad butonunu doldurur.")
     public void kullaniciSoyadButonunuDoldurur() {
-       adresEkleme.SoyAdAlaniButonu.sendKeys("Ağrıç");
+        adresEkleme.SoyAdAlaniButonu.sendKeys("Ağrıç");
     }
 
     @And("Kullanici telefon alanini doldurur.")
@@ -57,28 +63,30 @@ public class AdresStepDef {
     @And("Kullanici il secer.")
     public void kullaniciIlSecer() {
         bekle(2);
-        ReusableMethods.ddmIndex(adresEkleme.ilDropdawn,1);
+        ReusableMethods.ddmIndex(adresEkleme.ilDropdawn, 1);
 
     }
 
     @And("Kullanici ilce secer.")
     public void kullaniciIlceSecer() {
         bekle(2);
-        ReusableMethods.ddmIndex(adresEkleme.ilceDropdawn,1);
+        ReusableMethods.ddmIndex(adresEkleme.ilceDropdawn, 1);
 
     }
 
     @And("Kullanici mahalle secer.")
     public void kullaniciMahalleSecer() {
         bekle(2);
-        ReusableMethods.ddmIndex(adresEkleme.mahalleDropdawn,1);
+        ReusableMethods.ddmIndex(adresEkleme.mahalleDropdawn, 1);
 
     }
+
     @And("Kullanici sokak secer.")
     public void kullaniciSokakSecer() {
         bekle(5);
-        ReusableMethods.ddmIndex(adresEkleme.sokakDropdawn,3);
+        ReusableMethods.ddmIndex(adresEkleme.sokakDropdawn, 3);
     }
+
     @And("Kullanici bina no alanini doldurur.")
     public void kullaniciBinaNoAlaniniDoldurur() {
         bekle(2);
@@ -119,23 +127,26 @@ public class AdresStepDef {
     public void kullaniciUyariMesajiAlmali() {
         bekle(3);
         adresEkleme.adresBaslikButonu.click();
-        String actualMesaj=adresEkleme.baslikAlaniHataMesaji.getText();
-        String expectedMesaj="Başlık minimum 2, maksimum 100 karakter olması gerekiyor; girdiğiniz karekter sayısı 1.";
+        String actualMesaj = adresEkleme.baslikAlaniHataMesaji.getText();
+        String expectedMesaj = "Başlık minimum 2, maksimum 100 karakter olması gerekiyor; girdiğiniz karekter sayısı 1.";
 
-        Assert.assertEquals(expectedMesaj,actualMesaj);
+        Assert.assertEquals(expectedMesaj, actualMesaj);
     }
 
     @And("Adres tipi alanini boş birakir.")
     public void adresTipiAlaniniBoşBirakir() {
-        ReusableMethods.ddmIndex(adresEkleme.adresTipiButonu,0);
-        
+        bekle(5);
+        //ReusableMethods.ddmValue(adresEkleme.adresTipiButonu, "Ev");
+        Select select = new Select(adresEkleme.adresTipiButonu);
+        select.selectByIndex(1);
+
     }
 
     @Then("Kullanici uyari mesaji alir.")
     public void kullaniciUyariMesajiAlir() {
-        String actualMesaj= adresEkleme.adresTipiAlaniHataMesaji.getText();
-        String expectedMesaj= "Lütfen adres tipi seçiniz.";
-        Assert.assertEquals(expectedMesaj,actualMesaj);
+        String actualMesaj = adresEkleme.adresTipiAlaniHataMesaji.getText();
+        String expectedMesaj = "Lütfen adres tipi seçiniz.";
+        Assert.assertEquals(expectedMesaj, actualMesaj);
     }
 
     @Given("Ad butonuna {string} girilir")
@@ -149,7 +160,7 @@ public class AdresStepDef {
         adresEkleme.adAlaniHataMesaji.sendKeys(string);
     }
 
-    @Given("Soyad butonuna {string} girilir")
+    @And("Soyad butonuna {string} girilir")
     public void soyadButonunaGirilir(String string) {
         adresEkleme.SoyAdAlaniButonu.sendKeys(string);
     }
@@ -161,17 +172,20 @@ public class AdresStepDef {
 
     @Given("Telefon butonuna {string} girilir")
     public void telefonButonunaGirilir(String string) {
+        bekle(3);
         adresEkleme.telefonAlaniButonu.sendKeys(string);
 
     }
 
     @Then("Ve telefon alani {string} görüntülenir")
     public void veTelefonAlaniGörüntülenir(String string) {
+        bekle(3);
         adresEkleme.telefonAlaniHataMesaji.sendKeys(string);
     }
 
     @Given("Bina No butonuna {string} girilir")
     public void binaNoButonunaGirilir(String string) {
+        bekle(3);
         adresEkleme.binaNo.sendKeys(string);
     }
 
@@ -183,14 +197,18 @@ public class AdresStepDef {
 
     @Given("Kullanici test baslikli adresin duzenle butonuna tiklar.")
     public void kullaniciTestBaslikliAdresinDuzenleButonunaTiklar() {
-        adresEkleme.duzenleButonu.click();
+        bekle(3);
+        click(adresEkleme.duzenleButonu);
 
     }
 
     @When("Bilgilerde degişiklik yapar.")
     public void bilgilerdeDegişiklikYapar() {
+        bekle(3);
         adresEkleme.adAlaniButonu.clear();
+        bekle(3);
         adresEkleme.adAlaniButonu.sendKeys("Suay");
+
 
     }
 
@@ -202,11 +220,53 @@ public class AdresStepDef {
 
     @Given("Kullanici sil butonuna tiklar.")
     public void kullaniciSilButonunaTiklar() {
-        ReusableMethods.visibleWait(adresEkleme.sil,5);
-        click(adresEkleme.sil);
+        bekle(5);
+        click(adresEkleme.silenecekAdres);
+        click(adresEkleme.silButton);
     }
 
-    @Then("bina no{string} goruntulenir.")
-    public void binaNoGoruntulenir(String arg0) {
+
+    @Then("Soyad butonuna gecersiz veri girilir ve hata mesaji alinir.")
+    public void soyadButonunaGecersizVeriGirilirVeHataMesajiAlinir() {
+        String[][] invalidData = {
+                {"", "Soyad alanına özel karakter girmeyiniz."},
+                {"a", "Soyad minimum 2, maksimum 15 karakter olması gerekiyor; girdiğiniz karekter sayısı 1."},
+                {"/", "Soyad alanına özel karakter girmeyiniz."}
+        };
+
+        for (String[] data : invalidData) {
+            // Geçersiz adı gir
+            WebElement nameInput = adresEkleme.SoyAdAlaniButonu;
+            nameInput.clear();
+            nameInput.sendKeys(data[0]);
+            bekle(2);
+
+            // Hata mesajını kontrol et
+            WebElement errorMessage = adresEkleme.soyadAlaniHataMesaji;
+            String actualErrorMessage = errorMessage.getText();
+
+            // Beklenen hata mesajı ile gerçek hata mesajını karşılaştır
+            Assert.assertEquals("Hata mesajı beklenenden farklı!", data[1], actualErrorMessage);
+        }
+    }
+
+
+//        adresEkleme.SoyAdAlaniButonu.sendKeys(gecersizVeri);
+//       adresEkleme.soyadAlaniHataMesaji.sendKeys(hataMesaji);
+
+
+    @And("Ad butonuna {string} için {string} görüntülenir.")
+    public void adButonunaIçinGörüntülenir(String invalidData, String expectedErrorMessage) {
+        // Soyad butonuna belirli veriyi girme ve hata mesajını kontrol etme kodları
+        WebElement surnameInput = adresEkleme.adAlaniButonu;
+        surnameInput.clear();
+        surnameInput.sendKeys(invalidData);
+
+        // Hata mesajını kontrol et
+        WebElement errorMessage = adresEkleme.adAlaniHataMesaji;
+        String actualErrorMessage = errorMessage.getText();
+
+        // Beklenen hata mesajı ile gerçek hata mesajını karşılaştır
+        Assert.assertEquals("Hata mesajı beklenenden farklı!", expectedErrorMessage, actualErrorMessage);
     }
 }

@@ -26,7 +26,7 @@ public class AdreslerimPage {
     public WebElement adresBaslikButonu;
 
 
-    @FindBy(xpath = "(//*[@id=\"drpAdresTipi\"])[1]")
+    @FindBy(xpath = "(//*[@id='drpAdresTipi'])[1]")
     public WebElement adresTipiButonu;
 
 
@@ -85,7 +85,7 @@ public class AdreslerimPage {
     public WebElement adAlaniHataMesaji;
 
 
-    @FindBy(xpath = "(//*[@class='inputError active'])[2]")
+    @FindBy(xpath = "(//*[@id=\"addressAddForm\"]/div/div/div[2]/div/div/div/div[2]/form/div[3]/div[2]/span)[1]")
     public WebElement soyadAlaniHataMesaji;
 
 
@@ -105,8 +105,11 @@ public class AdreslerimPage {
     public WebElement adresBilgimiGüncelle;
 
 
-    @FindBy(xpath = "(//*[@id='btnAdresSil'])[1]")
-    public WebElement sil;
+    @FindBy(xpath = "//div[@class='row addressListItem'][1]")
+    public WebElement silenecekAdres;
+
+@FindBy(xpath = "//*[@id=\"btnAdresSil\"]")
+    public WebElement silButton;
 
 
 }

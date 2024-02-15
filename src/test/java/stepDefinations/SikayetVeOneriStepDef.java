@@ -24,7 +24,7 @@ public class SikayetVeOneriStepDef {
     AnaSayfaPage anaSayfa = new AnaSayfaPage();
     SikayetVeOneriPage sikayetVeOneri = new SikayetVeOneriPage();
 
-    @Given("Kullanici hesabim butonuna tiklar.")
+    @And("Kullanici hesabim butonuna tiklar.")
     public void kullanici_hesabim_butonuna_tiklar() {
         click(sikayetVeOneri.hesabimButon);
 

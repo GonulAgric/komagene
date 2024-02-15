@@ -37,50 +37,87 @@ public class SmokeStepDef {
 
     @Then("Hesabında oldugunu dogrular")
     public void hesabındaOldugunuDogrular() {
-        bekle(3);
+
+        bekle(10);
         Assert.assertEquals("HESABIM", smokePage.hesabim.getText());
+
+
+
     }
 
-   @Given("Adres secimini yapar.")
+  @Given("Adres secimini yapar.")
     public void adresSeciminiYapar() {
 
-    bekle(2);
-        smokePage.adresSecimAlani.click();
-        smokePage.kayitliAdreslerimTest.click();
-    List<WebElement> subeler = smokePage.subeList;
+        bekle(10);
+        ReusableMethods.click(smokePage.adresSecimAlani);
+        bekle(10);
+        click(smokePage.kayitliAdreslerimTest);
+        bekle(5);
+//    List<WebElement> subeler = smokePage.subeList;
+//
+//    boolean acikSubeSecildi = false;
+//
+//        for (WebElement sube : subeler) {
+//        // AÇIK durumunu kontrol et
+//        List<WebElement> acikDurumElementList = sube.findElements(By.xpath(".//p[contains(text(),'AÇIK')]"));
+//
+//        if (!acikDurumElementList.isEmpty() && acikDurumElementList.get(0).isDisplayed()) {
+//            WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
+//            subeAdiElement.click();
+//            System.out.println("Açık olan şube tıklandı: " + subeAdiElement.getText());
+//            acikSubeSecildi = true;
+//            break;  // Açık olan şubeyi bulduk, döngüden çık
+//        }
+//
+//        // AÇIK bulunamazsa GEL AL durumunu kontrol et
+//        List<WebElement> gelAlElementList = sube.findElements(By.xpath(".//p[contains(text(),'SADECE GEL AL')]"));
+//
+//        if (!gelAlElementList.isEmpty() && gelAlElementList.get(0).isDisplayed()) {
+//            WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
+//            subeAdiElement.click();
+//            System.out.println("Gel Al şube tıklandı: " + subeAdiElement.getText());
+//            break;  // Gel Al olan şubeyi bulduk, döngüden çık
+//        }
+//    }
+//
+//        if (!acikSubeSecildi) {
+//        System.out.println("Uyarı: Açık veya Gel Al şube bulunamadı. Subeler kapalı.");
+//        // Burada başka bir aksiyon veya hata durumunu ele alma kodu ekleyebilirsiniz.
+//    }
+      List<WebElement> subeler = Driver.getDriver().findElements(By.cssSelector(".subeListItem"));
 
-    boolean acikSubeSecildi = false;
+      boolean acikSubeVar = false;
 
-        for (WebElement sube : subeler) {
-        // AÇIK durumunu kontrol et
-        List<WebElement> acikDurumElementList = sube.findElements(By.xpath(".//p[contains(text(),'AÇIK')]"));
+      // Her bir şube için kontrol yap
+      for (WebElement sube : subeler) {
+          // Şube durumu elementini bul
+          WebElement durumElementi = sube.findElement(By.cssSelector(".text-center p"));
 
-        if (!acikDurumElementList.isEmpty() && acikDurumElementList.get(0).isDisplayed()) {
-            WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
-            subeAdiElement.click();
-            System.out.println("Açık olan şube tıklandı: " + subeAdiElement.getText());
-            acikSubeSecildi = true;
-            break;  // Açık olan şubeyi bulduk, döngüden çık
-        }
+          // Durumu kontrol et
+          String durum = durumElementi.getText().trim();
+          if (durum.equals("AÇIK")) {
+              // AÇIK durumdaysa tıkla
+              sube.click();
+              System.out.println("Açık olan şube tıklandı: " + sube.findElement(By.cssSelector("h6")).getText());
+              acikSubeVar = true;
+              break;
+          } else if (durum.equals("SADECE GEL AL")) {
+              // SADECE GEL AL durumdaysa tıkla
+              sube.click();
+              System.out.println("Gel Al şube tıklandı: " + sube.findElement(By.cssSelector("h6")).getText());
+              acikSubeVar = true;
+              break;
+          }
+      }
 
-        // AÇIK bulunamazsa GEL AL durumunu kontrol et
-        List<WebElement> gelAlElementList = sube.findElements(By.xpath(".//p[contains(text(),'SADECE GEL AL')]"));
+      // Açık veya SADECE GEL AL şube yoksa uyarı ver
+      if (!acikSubeVar) {
+          System.out.println("Uyarı: Açık veya Gel Al şube bulunamadı. Subeler kapalı.");
+      }
 
-        if (!gelAlElementList.isEmpty() && gelAlElementList.get(0).isDisplayed()) {
-            WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
-            subeAdiElement.click();
-            System.out.println("Gel Al şube tıklandı: " + subeAdiElement.getText());
-            break;  // Gel Al olan şubeyi bulduk, döngüden çık
-        }
-    }
 
-        if (!acikSubeSecildi) {
-        System.out.println("Uyarı: Açık veya Gel Al şube bulunamadı. Subeler kapalı.");
-        // Burada başka bir aksiyon veya hata durumunu ele alma kodu ekleyebilirsiniz.
-    }
-
-        smokePage.seciliAdresleDevam.click();
-}
+      smokePage.seciliAdresleDevam.click();
+ }
 
 
 
@@ -89,14 +126,14 @@ public class SmokeStepDef {
     public void kullaniciDürümlerKategorisineTiklar() {
 
         ReusableMethods.scroll(smokePage.durumler);
-        bekle(2);
+        ReusableMethods.visibleWait(smokePage.durumler,2);
         click(smokePage.durumler);
     }
 
     @And("Cigkofte durume menuye tiklar.")
     public void cigkofteDurumeMenuyeTiklar() {
 
-        bekle(2);
+        bekle(5);
         smokePage.CigKoftedurum.click();
 
     }
@@ -152,7 +189,7 @@ public class SmokeStepDef {
 
     @When("Teslimat turunu Gel Al secer.")
     public void teslimatTurunuGelAlSecer() {
-        bekle(3);
+        ReusableMethods.visibleWait(smokePage.odemeTeslimatTuru,3);
         click(smokePage.odemeTeslimatTuru);
     }
 

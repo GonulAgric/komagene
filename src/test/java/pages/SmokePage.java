@@ -15,10 +15,10 @@ public class SmokePage {
     @FindBy(xpath = "(//div[@class='hesabim-btn'])[2]")
     public WebElement hesabim;
 
-    @FindBy(xpath = "//*[@id='yazi']")
+    @FindBy(xpath = "//*[@id=\"main-wrapper\"]/div[1]/section/div[1]/div/div[1]/div[2]")
     public WebElement adresSecimAlani;
 
-    @FindBy(id = "addressListItem74075")
+    @FindBy(xpath = "//*[@id=\"addressListItem74092\"]/div/div/div[1]")
     public WebElement kayitliAdreslerimTest ;
 
 
@@ -103,7 +103,7 @@ public class SmokePage {
   @FindBy(xpath = "(//div[@type='button'])[7]")
     public WebElement yanindaIyiGider ;
 
-  @FindBy(xpath = "//*[@id='drpchk**22c6dce9-f606-45e0-c6f9-d3cf5eacb75e**124279d1-3f35-4c3c-baa9-16c67a165716**1**296a5f99-9ac7-4727-9c17-7bd185c2ec0e']")
+  @FindBy(xpath = "//*[text()='İçecek İstemiyorum']")
     public WebElement icecekIstemiyorum ;
 
   @FindBy(id = "btnSepeteEkle")

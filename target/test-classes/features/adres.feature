@@ -1,15 +1,13 @@
 @Adres
 Feature: Adres Bilgisi Ekleme
-  Background:
-    Given Ana sayfaya gidilir
+Background:
+  Given Ana sayfaya gidilir
     When Üye Ol Giriş Yap butonuna tıklanır
     And Telefon numarası girilir
     And Gelen dogrulama kodu girilir
     And Giriş Yap butonuna tıklanır
-    Given Kullanici hesabim butonuna tiklar.
+    And Kullanici hesabim butonuna tiklar.
     When Acilan dropdown menuden adreslerime tiklar.
-
-
 
   Scenario: : Kullanıcı yeni adres bilgisi ekler
     And  Kullanici Yeni Adres Ekle butonuna tiklar
@@ -58,7 +56,6 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 
 
   Scenario: Kullanıcı kayıtlı adresi güncelleyebilmeli.
-    And  Kullanici Yeni Adres Ekle butonuna tiklar
     Given Kullanici test baslikli adresin duzenle butonuna tiklar.
     When  Bilgilerde degişiklik yapar.
     And   Adres bilgimi kaydet butonuna basar.
@@ -66,9 +63,9 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 
 
   Scenario Outline: Ad alanina geçersiz veriler girildiğinde hata mesajı alınmalı
-  And  Kullanici Yeni Adres Ekle butonuna tiklar
-  Given Ad butonuna "<gecersiz_veri>" girilir
-  Then  Ve "<hata_mesaji>" görüntülenir
+  When  Kullanici Yeni Adres Ekle butonuna tiklar
+  And Ad butonuna "<gecersiz_veri>" için "<hata_mesaji>" görüntülenir.
+
   Examples:
     | gecersiz_veri             | hata_mesaji |
     |                           | Ad alanına özel karakter girmeyiniz. |
@@ -78,20 +75,46 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 
 
 
-  Scenario Outline: Soyad alanina geçersiz veriler girildiğinde hata mesajı alınmalı
-    And  Kullanici Yeni Adres Ekle butonuna tiklar
-    Given Soyad butonuna "<gecersiz_veri>" girilir
-    Then  Ve soyad "<hata_mesaji>" görüntülenir
-    Examples:
-      | gecersiz_veri             | hata_mesaji |
-      |                           | Soyad alanına özel karakter girmeyiniz. |
-      |      ?                    | Soyad alanına özel karakter girmeyiniz. |
-      |      a                    | Soyad minimum 2, maksimum 15 karakter olması gerekiyor; girdiğiniz karekter sayısı 1. |
-      |  onbeskarakterustu        |                                                                                       |
+#  Scenario Outline: Soyad alanina geçersiz veriler girildiğinde hata mesajı alınmalı
+#    Given Ana sayfaya gidilir
+#    When Üye Ol Giriş Yap butonuna tıklanır
+#    And Telefon numarası girilir
+#    And Gelen dogrulama kodu girilir
+#    And Giriş Yap butonuna tıklanır
+#    And Kullanici hesabim butonuna tiklar.
+#    When Acilan dropdown menuden adreslerime tiklar.
+#    And  Kullanici Yeni Adres Ekle butonuna tiklar
+#    And  Kullanici Yeni Adres Ekle butonuna tiklar
+#    Then Soyad butonuna "<gecersiz_veri>" için "<hata_mesaji>" girilir
+    #Then  Ve soyad "<hata_mesaji>" görüntülenir
+#    Examples:
+#      | gecersiz_veri             | hata_mesaji |
+#      |                           | Soyad alanına özel karakter girmeyiniz. |
+#      |      ?                    | Soyad alanına özel karakter girmeyiniz. |
+#      |      a                    | Soyad minimum 2, maksimum 15 karakter olması gerekiyor; girdiğiniz karekter sayısı 1. |
+#      |  onbeskarakterustu        |                                                                                       |
 
+Scenario:  Scenario Outline: Soyad alanina geçersiz veriler girildiğinde hata mesajı alınmalı
+  Given Ana sayfaya gidilir
+  When Üye Ol Giriş Yap butonuna tıklanır
+  And Telefon numarası girilir
+  And Gelen dogrulama kodu girilir
+  And Giriş Yap butonuna tıklanır
+  And Kullanici hesabim butonuna tiklar.
+  When Acilan dropdown menuden adreslerime tiklar.
+  And  Kullanici Yeni Adres Ekle butonuna tiklar
+  And  Kullanici Yeni Adres Ekle butonuna tiklar
+  Then Soyad butonuna gecersiz veri girilir ve hata mesaji alinir.
 
 
   Scenario Outline: Telefon alanina geçersiz veriler girildiğinde hata mesajı alınmalı
+    Given Ana sayfaya gidilir
+    When Üye Ol Giriş Yap butonuna tıklanır
+    And Telefon numarası girilir
+    And Gelen dogrulama kodu girilir
+    And Giriş Yap butonuna tıklanır
+    Given Kullanici hesabim butonuna tiklar.
+    When Acilan dropdown menuden adreslerime tiklar.
     And  Kullanici Yeni Adres Ekle butonuna tiklar
     Given Telefon butonuna "<gecersiz_veri>" girilir
     Then  Ve telefon alani "<hata_mesaji>" görüntülenir
@@ -105,8 +128,9 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 
 
   Scenario Outline: Bina No alanina geçersiz veriler girildiğinde hata mesajı alınmalı
+    And  Kullanici Yeni Adres Ekle butonuna tiklar
     Given Bina No butonuna "<gecersiz_veri>" girilir
-    Then  bina no"<hata_mesaji>" goruntulenir.
+    Then bina no alani "<hata_mesajı>" görüntülenir
     Examples:
       | gecersiz_veri             | hata_mesaji |
       |                           | Bina No alanına sadece numara,harf veya "-" ve "/" karakteri girebilirsiniz. |
