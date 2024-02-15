@@ -187,6 +187,7 @@ public class AdresStepDef {
     public void binaNoButonunaGirilir(String string) {
         bekle(3);
         adresEkleme.binaNo.sendKeys(string);
+
     }
 
 

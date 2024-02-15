@@ -5,10 +5,14 @@ import org.openqa.selenium.WebElement;
 import pages.SepetimPage;
 import utilities.ReusableMethods;
 import java.util.List;
-    public class SepetimStepDef {
+
+import static utilities.ReusableMethods.bekle;
+
+public class SepetimStepDef {
         SepetimPage sepetimPage = new SepetimPage();
         @When("Acılan dropdown menuden siparislerime tiklar.")
         public void acılan_dropdown_menuden_siparislerime_tiklar() {
+            bekle(5);
             sepetimPage.siparislerimButton.click();
         }
         @When("Gecmis siparislerimi gorur.")
