@@ -30,8 +30,6 @@ public class UyeOlStepDef {
     public void butonuna_tıklanır(String string) {
         ReusableMethods.visibleWait(loginPage.uyeolButton,2);
         ReusableMethods.click(loginPage.uyeolButton);
-
-
     }
     @When("Bir telefon numarası girilir")
     public void bir_telefon_numarası_girilir() {
@@ -48,7 +46,7 @@ public class UyeOlStepDef {
             loginPage.phoneNumber.click();
 
             loginPage.phoneNumber.sendKeys("5424494392");
-            loginPage.girişYap.click();
+            loginPage.girisYap.click();
             bekle(3);
         }
     }
@@ -158,7 +156,7 @@ public class UyeOlStepDef {
             loginPage.phoneNumber.click();
 
             loginPage.phoneNumber.sendKeys("54611276");
-            loginPage.girişYap.click();
+            loginPage.girisYap.click();
             bekle(3);
         }
     }
@@ -202,7 +200,7 @@ public class UyeOlStepDef {
     public void numarasi_girilir(String string) {
             loginPage.phoneNumber.click();
             loginPage.phoneNumber.sendKeys(string);
-            loginPage.girişYap.click();
+            loginPage.girisYap.click();
             bekle(2);
         }
 
