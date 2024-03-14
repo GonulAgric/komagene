@@ -20,7 +20,7 @@ public class KisiselBilgilerimPage {
     @FindBy(xpath = "//*[@id=\"txtAdSoyad\"]")
     public WebElement kisiselBilgilerimAdSoyad;
 
-    @FindBy(id = " txtEmail")
+    @FindBy(xpath =" //*[@id='txtEmail']")
     public WebElement kisiselBilgilerimEmail;
 
     @FindBy(xpath = "(//span[@class='checkmark'])[7]")
@@ -41,11 +41,24 @@ public class KisiselBilgilerimPage {
     @FindBy(xpath = "(//div[@class='container'])[10]")
     public WebElement adresBilgisiAlani;
 
-    @FindBy(xpath = "(//div[@class='container'])[10]")
+    @FindBy(xpath = "(//div[@class='modal-dialog modal-md'])[25]")
     public WebElement kBguncellemePopUp;
 
     @FindBy(xpath = "(//button[@class='btn-close'])[26]")
     public WebElement kBguncellemePopUpClose;
+
+    @FindBy(xpath = "//span[@class='inputError active']")
+    public WebElement uyariMesaji;
+
+    @FindBy(xpath = "//*[@id=\"main-wrapper\"]/article/div/div/div[3]")
+    public WebElement adreslerContainer;
+
+    @FindBy(xpath = "(//div[@class='p-2 bd-highlight align-middle'])[1]")
+    public WebElement adresEkle;
+
+
+    @FindBy(xpath = "(//div[@class='modal-body'])[23]")
+    public WebElement adresForm;
 
 
 

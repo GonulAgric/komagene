@@ -69,15 +69,15 @@ public class AdresStepDef {
 
     @And("Kullanici ilce secer.")
     public void kullaniciIlceSecer() {
-        bekle(2);
-        ReusableMethods.ddmIndex(adresEkleme.ilceDropdawn, 1);
+        bekle(4);
+        ReusableMethods.ddmIndex(adresEkleme.ilceDropdawn, 2);
 
     }
 
     @And("Kullanici mahalle secer.")
     public void kullaniciMahalleSecer() {
-        bekle(2);
-        ReusableMethods.ddmIndex(adresEkleme.mahalleDropdawn, 1);
+        bekle(4);
+        ReusableMethods.ddmIndex(adresEkleme.mahalleDropdawn, 3);
 
     }
 
@@ -135,18 +135,16 @@ public class AdresStepDef {
 
     @And("Adres tipi alanini boş birakir.")
     public void adresTipiAlaniniBoşBirakir() {
-        bekle(5);
-        //ReusableMethods.ddmValue(adresEkleme.adresTipiButonu, "Ev");
-        Select select = new Select(adresEkleme.adresTipiButonu);
-        select.selectByIndex(1);
 
     }
 
     @Then("Kullanici uyari mesaji alir.")
     public void kullaniciUyariMesajiAlir() {
+        bekle(3);
         String actualMesaj = adresEkleme.adresTipiAlaniHataMesaji.getText();
         String expectedMesaj = "Lütfen adres tipi seçiniz.";
-        Assert.assertEquals(expectedMesaj, actualMesaj);
+        bekle(5);
+        Assert.assertEquals(expectedMesaj,actualMesaj);
     }
 
     @Given("Ad butonuna {string} girilir")

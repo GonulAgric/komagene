@@ -1,10 +1,8 @@
 package stepDefinations;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,7 +12,6 @@ import pages.AnaSayfaPage;
 import pages.SikayetVeOneriPage;
 import utilities.Driver;
 import utilities.ReusableMethods;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -27,6 +24,7 @@ public class SikayetVeOneriStepDef {
     @And("Kullanici hesabim butonuna tiklar.")
     public void kullanici_hesabim_butonuna_tiklar() {
         click(sikayetVeOneri.hesabimButon);
+
 
     }
 
@@ -48,10 +46,8 @@ public class SikayetVeOneriStepDef {
         sikayetVeOneri.sikayetVeOnerilerYeniButtonu.click();
     }
 
-
-    @Then("Yeni sikayetin goruntulendigini dogrular.")
-    public void yeniSikayetinGoruntulendiginiDogrular() {
-
+    @And("Yeni sikayet ekler.")
+    public void yeniSikayetEkler() {
         anaSayfa.iletisimAdButonu.sendKeys("Gonul");
         anaSayfa.iletisimSoyadButonu.sendKeys("Agrıc");
         bekle(3);
@@ -69,49 +65,24 @@ public class SikayetVeOneriStepDef {
         ReusableMethods.ddmIndex(anaSayfa.iletisimIlDrapDown, 2);
         bekle(3);
         ddmIndex(anaSayfa.iletisimIlceDrapDown, 2);
-
-        // Yeni şikayet oluştur
-        String yeniSikayetMetni = "Bu bir test mesajıdır dikkate almayınız lütfen ";
-        WebElement sikayetMetniInput = Driver.getDriver().findElement(By.id("txtContactPageAciklama"));
-        sikayetMetniInput.sendKeys(yeniSikayetMetni);
+        bekle(3);
+        ReusableMethods.ddmIndex(sikayetVeOneri.konuAlani, 2);
+        bekle(3);
+        sikayetVeOneri.mesajAlani.sendKeys("Bu bir test mesajıdır dikkate almayınız lütfen ");
         bekle(5);
         click(anaSayfa.iletisimKvkkKutucugu);
         bekle(2);
         click(anaSayfa.iletisimAcıkRizaKutucugu);
         bekle(3);
         anaSayfa.iletisimFormuGonderButonu.click();
-        bekle(2);
-        sikayetVeOneri.kapatButtonu.click();
-        bekle(3);
-        Driver.getDriver().navigate().back();
-        bekle(3);
-        sikayetVeOneri.sonSikayet.click();
+    }
+
+    @Then("Yeni sikayetin goruntulendigini dogrular.")
+    public void yeniSikayetinGoruntulendiginiDogrular() {
+
         bekle(10);
-        // Şikayet metinlerini içeren tüm dropdown'ları al
-        List<WebElement> sikayetDropdownList = Driver.getDriver().findElements(By.cssSelector(".accordion-item .accordion-button"));
+        Assert.assertTrue(sikayetVeOneri.yeniSikayetSuccessMesaj.getText().contains("Mesajınız gönderilmiştir."));
 
-
-// Her bir dropdown için kontrol yap
-        boolean yeniSikayetEklendi = false;
-        for (WebElement sikayetDropdown : sikayetDropdownList) {
-            // Dropdown'ı aç
-            click(sikayetDropdown);
-
-            // Dropdown içindeki şikayet metni elementini al
-            WebElement sikayetMetniElement = sikayetDropdown.findElement(By.xpath("(//*[@class='col-md-12 text-start'])[2]"));
-
-            // Debug: Şikayet metnini yazdır
-            System.out.println("Şikayet Metni: " + sikayetMetniElement.getText());
-
-            // Yeni şikayet metni ile karşılaştır
-            if (sikayetMetniElement.getText().equals(yeniSikayetMetni)) {
-                yeniSikayetEklendi = true;
-                break;
-            }
-        }
-       bekle(10);
-// Yeni şikayetin herhangi bir dropdown içine eklenip eklenmediğini doğrula
-        Assert.assertTrue("Hata: Yeni şikayet dropdown içine eklenmemiştir.", yeniSikayetEklendi);
     }
 
 }

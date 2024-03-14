@@ -14,10 +14,11 @@ Feature: Sikayet ve Oneriler
    When Acilan dropdown menuden sikayet ve oneriye tiklar.
    Then Sikayet ve onerilerim'in otomatik geldigini gorur.
 
-    Scenario: Kullanıcı yeni şikayet ekleyebilmeli.
+  Scenario: Kullanıcı yeni şikayet ekleyebilmeli.
   Given  Kullanici hesabim butonuna tiklar.
   When  Acilan dropdown menuden sikayet ve oneriye tiklar.
   And Kullanici yeni butonuna tiklar.
+  And Yeni sikayet ekler.
   Then Yeni sikayetin goruntulendigini dogrular.
 
 

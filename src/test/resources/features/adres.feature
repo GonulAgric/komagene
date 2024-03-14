@@ -95,26 +95,11 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 #      |  onbeskarakterustu        |                                                                                       |
 
 Scenario:  Scenario Outline: Soyad alanina geçersiz veriler girildiğinde hata mesajı alınmalı
-  Given Ana sayfaya gidilir
-  When Üye Ol Giriş Yap butonuna tıklanır
-  And Telefon numarası girilir
-  And Gelen dogrulama kodu girilir
-  And Giriş Yap butonuna tıklanır
-  And Kullanici hesabim butonuna tiklar.
-  When Acilan dropdown menuden adreslerime tiklar.
-  And  Kullanici Yeni Adres Ekle butonuna tiklar
   And  Kullanici Yeni Adres Ekle butonuna tiklar
   Then Soyad butonuna gecersiz veri girilir ve hata mesaji alinir.
 
 
   Scenario Outline: Telefon alanina geçersiz veriler girildiğinde hata mesajı alınmalı
-    Given Ana sayfaya gidilir
-    When Üye Ol Giriş Yap butonuna tıklanır
-    And Telefon numarası girilir
-    And Gelen dogrulama kodu girilir
-    And Giriş Yap butonuna tıklanır
-    Given Kullanici hesabim butonuna tiklar.
-    When Acilan dropdown menuden adreslerime tiklar.
     And  Kullanici Yeni Adres Ekle butonuna tiklar
     Given Telefon butonuna "<gecersiz_veri>" girilir
     Then  Ve telefon alani "<hata_mesaji>" görüntülenir

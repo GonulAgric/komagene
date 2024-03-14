@@ -18,7 +18,7 @@ import java.io.IOException;
 
 import static utilities.ReusableMethods.bekle;
 
-public class ÜyeOlStepDef {
+public class UyeOlStepDef {
     UyeOlPage loginPage = new UyeOlPage();
 
     @Given("Ana sayfaya gidilir")

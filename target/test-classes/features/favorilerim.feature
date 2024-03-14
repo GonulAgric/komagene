@@ -11,6 +11,9 @@ Feature: Favorilerim
   Scenario: Kullanıcı ürün kartında favori işaretine tıklayabilmeli.
     And Urun kartlarindan birine tiklar.
     And Acilan urun detayinda favori simgesine tiklar.
+    Given Adres secimini yapar.
+    When Kullanıcı hesabım butonuna tıklar.
+    And Acılan dropdown menuden favori urunlerime tiklar.
     Then Urunun favorilerine eklendigini dogrular.
 
 

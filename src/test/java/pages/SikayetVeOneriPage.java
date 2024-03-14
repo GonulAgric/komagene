@@ -35,6 +35,18 @@ public class SikayetVeOneriPage {
     @FindBy(xpath = "//*[@id=\"heading0\"]/button/div")
     public WebElement sonSikayet;
 
+    @FindBy(xpath = "//*[@id=\"drpKonu\"]")
+    public WebElement konuAlani;
+
+
+    @FindBy(id = "txtContactPageAciklama")
+    public WebElement mesajAlani;
+
+
+
+    @FindBy(xpath = "//div[text()='Mesajınız gönderilmiştir.']")
+    public WebElement yeniSikayetSuccessMesaj;
+
 
 
 

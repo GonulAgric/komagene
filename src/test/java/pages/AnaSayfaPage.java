@@ -132,6 +132,8 @@ public class AnaSayfaPage {
 
    @FindBy(xpath = "//*[@id=\"drpIlce\"]")
     public WebElement iletisimIlceDrapDown;
+//   @FindBy(xpath = "//*[@id=\"drpIlce\"]")
+//    public WebElement ;
 
 
    @FindBy(xpath = "//*[@id=\"txtContactPageAciklama\"]")

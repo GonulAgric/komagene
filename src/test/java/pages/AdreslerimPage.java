@@ -30,7 +30,7 @@ public class AdreslerimPage {
     public WebElement adresTipiButonu;
 
 
-    @FindBy(xpath = "(//*[@id='txtAddressAddFormAd'])[1]")
+    @FindBy(xpath = "(//*[@id='txtAddresEditFormAd'])[1]")
     public WebElement adAlaniButonu;
 
 
@@ -77,7 +77,7 @@ public class AdreslerimPage {
     public WebElement baslikAlaniHataMesaji;
 
 
-    @FindBy(xpath = "(//*[@class='col-md-12'])[45]")
+    @FindBy(xpath = "(//*[@class='col-md-12'])[56]")
     public WebElement adresTipiAlaniHataMesaji;
 
 

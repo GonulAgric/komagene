@@ -48,42 +48,12 @@ public class SmokeStepDef {
   @Given("Adres secimini yapar.")
     public void adresSeciminiYapar() {
 
-        bekle(10);
+      WebDriverWait wait = new WebDriverWait(Driver.getDriver(),Duration.ofSeconds(5));
+      WebElement element = wait.until(ExpectedConditions.elementToBeClickable(smokePage.adresSecimAlani));
         ReusableMethods.click(smokePage.adresSecimAlani);
         bekle(10);
         click(smokePage.kayitliAdreslerimTest);
-        bekle(5);
-//    List<WebElement> subeler = smokePage.subeList;
-//
-//    boolean acikSubeSecildi = false;
-//
-//        for (WebElement sube : subeler) {
-//        // AÇIK durumunu kontrol et
-//        List<WebElement> acikDurumElementList = sube.findElements(By.xpath(".//p[contains(text(),'AÇIK')]"));
-//
-//        if (!acikDurumElementList.isEmpty() && acikDurumElementList.get(0).isDisplayed()) {
-//            WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
-//            subeAdiElement.click();
-//            System.out.println("Açık olan şube tıklandı: " + subeAdiElement.getText());
-//            acikSubeSecildi = true;
-//            break;  // Açık olan şubeyi bulduk, döngüden çık
-//        }
-//
-//        // AÇIK bulunamazsa GEL AL durumunu kontrol et
-//        List<WebElement> gelAlElementList = sube.findElements(By.xpath(".//p[contains(text(),'SADECE GEL AL')]"));
-//
-//        if (!gelAlElementList.isEmpty() && gelAlElementList.get(0).isDisplayed()) {
-//            WebElement subeAdiElement = sube.findElement(By.xpath(".//h6"));
-//            subeAdiElement.click();
-//            System.out.println("Gel Al şube tıklandı: " + subeAdiElement.getText());
-//            break;  // Gel Al olan şubeyi bulduk, döngüden çık
-//        }
-//    }
-//
-//        if (!acikSubeSecildi) {
-//        System.out.println("Uyarı: Açık veya Gel Al şube bulunamadı. Subeler kapalı.");
-//        // Burada başka bir aksiyon veya hata durumunu ele alma kodu ekleyebilirsiniz.
-//    }
+
       List<WebElement> subeler = Driver.getDriver().findElements(By.cssSelector(".subeListItem"));
 
       boolean acikSubeVar = false;
@@ -126,7 +96,7 @@ public class SmokeStepDef {
     public void kullaniciDürümlerKategorisineTiklar() {
 
         ReusableMethods.scroll(smokePage.durumler);
-        ReusableMethods.visibleWait(smokePage.durumler,2);
+        bekle(3);
         click(smokePage.durumler);
     }
 
@@ -141,7 +111,10 @@ public class SmokeStepDef {
     @And("Opsiyon seçimlerini yapar.")
     public void opsiyonSeçimleriniYapar() {
 
-        bekle(10);
+
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),Duration.ofSeconds(5));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(smokePage.AciSecimi));
+
         click(smokePage.AciSecimi);
         bekle(5);
         click(smokePage.doritosSecimi);
@@ -182,14 +155,14 @@ public class SmokeStepDef {
     @Given("Kullanici sepetime tiklar.")
     public void kullaniciSepetimeTiklar() {
 
-        ReusableMethods.visibleWait(smokePage.sepetim, 10);
+        bekle(10);
         click(smokePage.sepetim);
     }
 
 
     @When("Teslimat turunu Gel Al secer.")
     public void teslimatTurunuGelAlSecer() {
-        ReusableMethods.visibleWait(smokePage.odemeTeslimatTuru,3);
+        bekle(5);
         click(smokePage.odemeTeslimatTuru);
     }
 

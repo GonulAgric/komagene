@@ -360,7 +360,10 @@ public class ReusableMethods {
         return Driver.getDriver().findElement(bannerLocator);
     }
 
-
+    public static void clearElementWithJS(WebDriver driver, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value = '';", element);
+    }
 }
 
 
