@@ -13,18 +13,14 @@ public class AdreslerimPage {
     @FindBy(xpath = "//*[@id=\"dropdownMenuButton1\"]/div")
     public WebElement hesabimButonu;
 
-
     @FindBy(xpath = "(//*[@class='dropdown-item'])[9]")
     public WebElement adreslerimButonu;
-
 
     @FindBy(xpath = "(//*[@class='d-block w-100 b2cButon'])[7]")
     public WebElement yeniAdresBilgisiEkleButonu;
 
-
     @FindBy(xpath = "(//*[@id='txtAddressAddFormBaslik'])[1]")
     public WebElement adresBaslikButonu;
-
 
     @FindBy(xpath = "(//*[@id='drpAdresTipi'])[1]")
     public WebElement adresTipiButonu;
@@ -108,8 +104,9 @@ public class AdreslerimPage {
     @FindBy(xpath = "//div[@class='row addressListItem'][1]")
     public WebElement silenecekAdres;
 
-@FindBy(xpath = "//*[@id=\"btnAdresSil\"]")
+   @FindBy(xpath = "//*[@id=\"btnAdresSil\"]")
     public WebElement silButton;
+
 
 
 }

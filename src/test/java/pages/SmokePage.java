@@ -112,7 +112,7 @@ public class SmokePage {
   @FindBy(xpath = "(//*[@class='card-img-center d-block w-100'])[3]")
     public WebElement durumler ;
 
-  @FindBy(xpath = "//*[@id=\"main-wrapper\"]/article[1]/section/div[2]/div/div[1]/div[1]/div/img")
+  @FindBy(xpath = "//*[@id=\"main-wrapper\"]/article[1]/section/div[2]/div/div[1]/div[3]/div[2]/button")
     public WebElement CigKoftedurum ;
 
   @FindBy(xpath = "(//*[@class='d-block w-100'])[1]")
@@ -146,7 +146,7 @@ public class SmokePage {
    @FindBy(xpath = "//*[@id=\"main-wrapper\"]/article[1]/section/div[2]/div/div[15]/div[1]/div/img")
     public WebElement magnum ;
 
-   @FindBy(xpath = "(//*[@id=\"dropdownMenuButton1\"])[3]")
+   @FindBy(xpath = "//div[contains(@class,'d-none d-sm-block')]//a[contains(text(),'SEPETİM')]")
     public WebElement sepetim ;
 
    @FindBy(xpath = "//*[@id=\"main-wrapper\"]/article[2]/section/div/div[2]/div[1]/div[3]/div[1]/div/div[1]/div/div[3]")

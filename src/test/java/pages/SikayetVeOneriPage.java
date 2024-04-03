@@ -11,7 +11,7 @@ public class SikayetVeOneriPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    @FindBy(xpath = "(//div[text()=' HESABIM '])[2]")
+    @FindBy(xpath = "(//div[@class='hesabim-btn'])[2]")
     public WebElement hesabimButon;
 
 

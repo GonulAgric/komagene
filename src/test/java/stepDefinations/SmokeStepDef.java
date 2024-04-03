@@ -11,6 +11,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -53,6 +54,7 @@ public class SmokeStepDef {
         ReusableMethods.click(smokePage.adresSecimAlani);
         bekle(10);
         click(smokePage.kayitliAdreslerimTest);
+        bekle(10);
 
       List<WebElement> subeler = Driver.getDriver().findElements(By.cssSelector(".subeListItem"));
 
@@ -103,18 +105,15 @@ public class SmokeStepDef {
     @And("Cigkofte durume menuye tiklar.")
     public void cigkofteDurumeMenuyeTiklar() {
 
-        bekle(5);
-        smokePage.CigKoftedurum.click();
+        bekle(10);
+       click( smokePage.CigKoftedurum);
 
     }
 
     @And("Opsiyon seçimlerini yapar.")
     public void opsiyonSeçimleriniYapar() {
 
-
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),Duration.ofSeconds(5));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(smokePage.AciSecimi));
-
+        bekle(10);
         click(smokePage.AciSecimi);
         bekle(5);
         click(smokePage.doritosSecimi);
@@ -150,13 +149,14 @@ public class SmokeStepDef {
     public void sepeteEkleButonunaTıklar() {
         bekle(5);
         click(smokePage.sepeteEkleButtonu);
+        bekle(10);
     }
 
     @Given("Kullanici sepetime tiklar.")
     public void kullaniciSepetimeTiklar() {
 
-        bekle(10);
-        click(smokePage.sepetim);
+        bekle(5);
+        smokePage.sepetim.click();
     }
 
 

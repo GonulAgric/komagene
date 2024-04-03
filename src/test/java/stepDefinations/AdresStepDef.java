@@ -45,6 +45,7 @@ public class AdresStepDef {
 
     @When("Kullanici ad  butonunu doldurur.")
     public void kullaniciAdButonunuDoldurur() {
+        bekle(3);
         adresEkleme.adAlaniButonu.sendKeys("Gönül");
 
     }

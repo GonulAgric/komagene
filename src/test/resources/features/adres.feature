@@ -1,5 +1,6 @@
 @Adres
 Feature: Adres Bilgisi Ekleme
+
 Background:
   Given Ana sayfaya gidilir
     When Üye Ol Giriş Yap butonuna tıklanır
@@ -8,7 +9,7 @@ Background:
     And Giriş Yap butonuna tıklanır
     And Kullanici hesabim butonuna tiklar.
     When Acilan dropdown menuden adreslerime tiklar.
-
+  @aaaa
   Scenario: : Kullanıcı yeni adres bilgisi ekler
     And  Kullanici Yeni Adres Ekle butonuna tiklar
     And  Kullanici baslik butonunu doldurur.
@@ -64,9 +65,12 @@ Scenario: Adres tipi alanı boş bırakıldığında hata mesajı alınmalı.
 
   Scenario Outline: Ad alanina geçersiz veriler girildiğinde hata mesajı alınmalı
   When  Kullanici Yeni Adres Ekle butonuna tiklar
-  And Ad butonuna "<gecersiz_veri>" için "<hata_mesaji>" görüntülenir.
+  And Ad butonuna " " için "Ad alanına özel karakter girmeyiniz." görüntülenir.
+    And Ad butonuna "<gecersiz_veri>" için "<hata_mesaji>" görüntülenir.
+    And Ad butonuna "<gecersiz_veri>" için "<hata_mesaji>" görüntülenir.
 
-  Examples:
+
+    Examples:
     | gecersiz_veri             | hata_mesaji |
     |                           | Ad alanına özel karakter girmeyiniz. |
     |      ?                    | Ad alanına özel karakter girmeyiniz. |

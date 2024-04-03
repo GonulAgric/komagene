@@ -74,6 +74,9 @@ public class GirisStepDef {
     @When("Giriş Yap butonuna tıklanır")
     public void girişYapButonunaTıklanır() {
         uyeOlPage.girisYapAllert.click();
+        bekle(3);
+
+        uyeOlPage.cerezPolitikasıPopUpTamam.click();
 
     }
 

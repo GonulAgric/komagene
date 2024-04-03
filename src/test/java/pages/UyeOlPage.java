@@ -79,4 +79,10 @@ public class UyeOlPage {
 
     @FindBy(xpath = "(//div[@class='col-md-12'])[19]")
     public WebElement KVKKhataMesaji;
+
+    @FindBy(xpath = "//*[@id=\"cookie-notice\"]")
+    public WebElement cerezPolitikasıPopUp;
+
+    @FindBy(xpath = "//*[@id=\"cookie-notice\"]/button[1]")
+    public WebElement cerezPolitikasıPopUpTamam;
 }

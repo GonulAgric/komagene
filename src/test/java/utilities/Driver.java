@@ -1,89 +1,84 @@
 package utilities;
 
-
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
-import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Driver {
-    /*
-        Driver class'ındaki temel mantık extends yöntemiyle değil yani ReusableMethods class'ına extent etmek yerine
-    Driver class'ından static methodlar kullanarak driver oluştururuz. Static olduğu için class ismi ile
-    her yerden methoda ulaşabileceğiz.
-     */
-    /*
-    Singleton Pattern: Tekli kullanım kalıbı.
-        Bir class'tan obje oluşturulmasının önüne geçilmesi için kullanılan ifade
-        Bir class'tan obje oluşturmanın önüne geçmek için default constructor'ın kullanımını engellemek için
-    private access modifire kullanarak bir constructor oluştururuz
-     */
+    private static ThreadLocal<WebDriver> driverPool = new ThreadLocal<WebDriver>();
     private Driver() {
-
     }
+    /**
+     * Synchronized makes method thread safe.
+     * It ensures that only 1 thread can use it at the time.
+     * Thread safety reduces performance but it makes everything safe.
+     * @return WebDriver
+     */
+    public synchronized static WebDriver getDriver() {
+        if (driverPool.get() == null) {
+            System.out.println("getDriver *******************");
+            System.out.println("getDriver *******************");
 
-    static WebDriver driver;
+            /*
+             * We specified the type of browser in the configuration.properties file.
+             * And then, we load these information into a Properties class object
+             * by initiating a FileInputStream class  object.
+             * This is where we will get type of browser by using ConfigurationReader.java class object.
+             */
+            String browser = ConfigReader.getProperty("browser").toLowerCase();
 
-    public static WebDriver getDriver() {
-        /*
-            Driver'i her çağırdığında yeni bir pencere açılmasının önüne geçmek için
-        if bloğu içinde Eğer driver'a değer atanmamışsa(driver doluysa) değer ata, Eğer değer atanmışsa Driver'i aynı
-        sayfada RETURN et. Bunun sadece yapmamız gereken if(driver==null) kullanmak
-         */
-
-
-        if (driver == null) {
-            switch (ConfigReader.getProperty("browser")) {
+            switch (browser) {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--start-maximized");
+                    driverPool.set(new ChromeDriver(chromeOptions));
                     break;
-                case "edge":
-                    WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver(new EdgeOptions().addArguments("--remote-allow-origins=*"));
+                case "firefox":
+                    WebDriverManager.firefoxdriver().setup();
+                    driverPool.set(new FirefoxDriver());
+                    break;
+                case "safari":
+                    driverPool.set(new SafariDriver());
+                    driverPool.get().manage().window().maximize();
                     break;
                 default:
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
-
+                    throw new RuntimeException("Wrong browser name !");
             }
-
-
-
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(8));
         }
-
-        return driver;
+        return driverPool.get();
     }
+    /**
+     * Creates and returns a WebDriver instance for a specified mobile device emulation.
+     * This method is synchronized to ensure thread safety when accessing the driverPool.
+     * @param deviceName The name of the mobile device to emulate.
+     * This should be a valid device name recognized by ChromeDriver for emulation.
+     * @return A WebDriver instance configured for the specified mobile device emulation.
+     */
+    public synchronized static WebDriver getDriver(String deviceName) {
+        System.out.println("getDriver with parameter *******************");
+        System.out.println("getDriver with parameter *******************");
+        Map<String, String> mobileEmulation = new HashMap<>();
+        mobileEmulation.put("deviceName", deviceName);
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
+        chromeOptions.addArguments("--start-maximized");
+        driverPool.set(new ChromeDriver(chromeOptions));
 
+        return driverPool.get();
+    }
     public static void closeDriver() {
-        if (driver != null) {//Driver'a değer atanmışşsa
-            driver.close();
-            driver = null;
+        if (driverPool != null) {
+            driverPool.get().quit();
+            driverPool.remove();
         }
     }
+}
 
-    public static void quitDriver() {
-        if (driver != null) {//Driver'a değer atanmışşsa
-            driver.quit();
-            driver = null;
-        }
-    }
-
-
-
-
-    public static void clickWithJS(WebElement element) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
-    }
-
-
-}        
