@@ -169,7 +169,7 @@ public class AnaSayfaPage {
 
 
 
-   @FindBy(xpath = "//*[@class=\"inputError active\"]")
+   @FindBy(xpath = "//*[@id=\"main-wrapper\"]/article[1]/div/div[4]/div/div/div[2]/div[1]/span")
     public WebElement iletisimTelefonAlaniBosBirakilincaMesaji;
 
 

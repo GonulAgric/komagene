@@ -95,7 +95,7 @@ Feature: Anasayfa
     Examples:
       | gecersiz_veri          | hata_mesaji                                                  |
       |                        | Telefon alanına numara giriniz.                              |
-      | 546112761              | Telefon alanı 10 karekter olması gerekiyor.Karakter sayısı:1 |
+      | 546112761              | Telefon alanı 10 karekter olması gerekiyor.Karakter sayısı:9 |
       | 55566622277788         |                                                                                          |
 
 
@@ -119,6 +119,7 @@ Scenario: Ana sayfada kurumsal sayfalar( iletişim)formunda yeni bir ülke seçe
   And  Ulke alanini degistirir.
   And  Il alanina veri girer.
   And  Ilce alanina veri girer.
+  And  Konu alanina veri girer.
   And  Aciklama alanina veri girer
   And Kvkk bilgi formunu okudum onayliyorum kutucugunu isaretler.
   And Acik riza metnini okudum onayliyorum kutucugunu isaretler.

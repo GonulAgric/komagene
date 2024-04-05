@@ -381,6 +381,7 @@ public class AnaSayfaStepDef {
 
     @Given("Kullanici anasayfada  iletisim sekmesine tiklar.")
     public void kullaniciAnasayfadaIletisimSekmesineTiklar() {
+        bekle(5);
         click(anaSayfa.iletisim);
 
     }
@@ -494,6 +495,8 @@ public class AnaSayfaStepDef {
 
     @Then("Telefon alaninda {string} goruntulenir")
     public void telefonAlanindaGoruntulenir(String string) {
+        anaSayfa.iletisimTelefonButonu.click();
+        bekle(3);
         assertTrue(anaSayfa.iletisimTelefonAlaniBosBirakilincaMesaji.getText().contains(string));
     }
 
@@ -504,6 +507,7 @@ public class AnaSayfaStepDef {
 
     @Then("Email alaninda {string} goruntulenir")
     public void emailAlanindaGoruntulenir(String string) {
+        bekle(3);
         assertTrue(anaSayfa.iletisimEmailAlaniBosBirakilincaMesaji.getText().contains(string));
     }
 
@@ -538,6 +542,13 @@ public class AnaSayfaStepDef {
     public void ılAlaninaVeriGirer() {
         ReusableMethods.ddmIndex(anaSayfa.iletisimIlDrapDown,1);
         bekle(3);
+    }
+
+    @And("Konu alanina veri girer.")
+    public void konuAlaninaVeriGirer() {
+
+        bekle(3);
+        ddmIndex(anaSayfa.konuAlani,2);
     }
 
     @And("Ilce alanina veri girer.")
@@ -596,5 +607,7 @@ public class AnaSayfaStepDef {
     @Then("Banner tiklanabilir ve ilgili sayfaya yonlendirilir")
     public void bannerTiklanabilirVeIlgiliSayfayaYonlendirilir() {
     }
+
+
 }
 
