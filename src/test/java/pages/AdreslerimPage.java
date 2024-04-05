@@ -26,8 +26,12 @@ public class AdreslerimPage {
     public WebElement adresTipiButonu;
 
 
-    @FindBy(xpath = "(//*[@id='txtAddresEditFormAd'])[1]")
+    @FindBy(xpath = "(//*[@id='txtAddressAddFormAd'])[1]")
     public WebElement adAlaniButonu;
+
+
+    @FindBy(xpath = "(//*[@id='txtAddresEditFormAd'])[1]")
+    public WebElement adAlaniEditButonu;
 
 
     @FindBy(xpath = "(//*[@id=\"txtAddressAddFormSoyad\"])[1]")
@@ -73,7 +77,7 @@ public class AdreslerimPage {
     public WebElement baslikAlaniHataMesaji;
 
 
-    @FindBy(xpath = "(//*[@class='col-md-12'])[56]")
+    @FindBy(xpath = "//*[text()='Lütfen adres tipi seçiniz.']")
     public WebElement adresTipiAlaniHataMesaji;
 
 
@@ -85,11 +89,11 @@ public class AdreslerimPage {
     public WebElement soyadAlaniHataMesaji;
 
 
-    @FindBy(xpath = "//*[text()='Telefon alanına numara giriniz.']")
+    @FindBy(xpath = "//*[@class=\"inputError active\"]")
     public WebElement telefonAlaniHataMesaji;
 
 
-    @FindBy(xpath = "//*[text()='Bina No alanına sadece numara,harf veya \"-\" ve \"/\"  karakteri girebilirsiniz.']")
+    @FindBy(xpath = "//*[@class='inputError active']")
     public WebElement binaNoAlaniHataMesaji;
 
 

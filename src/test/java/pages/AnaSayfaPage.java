@@ -155,7 +155,7 @@ public class AnaSayfaPage {
     public WebElement iletisimFormuGonderButonu;
 
 
-   @FindBy(xpath = "//*[text()=\"Mesajınız gönderilmiştir.\"]")
+   @FindBy(xpath = "(//*[@class=\"col-md-12 text-center\"])[6]")
     public WebElement iletisimBilgilendirMesaji;
 
 
@@ -169,7 +169,7 @@ public class AnaSayfaPage {
 
 
 
-   @FindBy(xpath = "//*[text()=\"Telefon alanına numara giriniz.\"]")
+   @FindBy(xpath = "//*[@class=\"inputError active\"]")
     public WebElement iletisimTelefonAlaniBosBirakilincaMesaji;
 
 
@@ -199,6 +199,10 @@ public class AnaSayfaPage {
 
    @FindBy(xpath = "//*[@title='100.Yıl Kampanyası ']")
     public WebElement banneryuzuncuYıl;
+
+
+   @FindBy(xpath = "//*[@id=\"drpKonu\"]")
+    public WebElement konuAlani;
 
 
 

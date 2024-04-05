@@ -18,3 +18,58 @@ Feature: Odeme
     Given Kullanici sepetime tiklar.
     And   Sipariş ver butonuna tiklar.
     And   Odeme seceneklerini goruntuler ve secer.
+
+  Scenario: Kart bilgileri saklanabilmeli.
+    Given Kullanici sepetime tiklar.
+    And   Sipariş ver butonuna tiklar.
+    And   Kart bilgilerini girer
+    And   Bu kart bilgilerimi saklamak istiyorum checkbox tiklar.
+    Then  Kart bilgilerinin saklandigini dogrular.
+
+  Scenario: Geçersiz kart bilgileri girilince uyarı mesajı gelmeli
+    Given Kullanici sepetime tiklar.
+    And   Sipariş ver butonuna tiklar.
+    And   Gecersiz kart bilgileri girer
+    And Siparisi tamamla butonuna tiklar.
+    Then  Uyari mesaji alir.
+
+  Scenario: Sipariş notu bölümüne 100 karakterden az sipariş notu girilmeli.
+    Given Kullanici sepetime tiklar.
+    And   Sipariş ver butonuna tiklar.
+    And   Siparis notu bolumune yuz karakterden az bir not yazar.
+
+  Scenario: Sipariş notu bölümüne 100 karakterden fazla sipariş notu girilmemeli.
+    Given Kullanici sepetime tiklar.
+    And   Sipariş ver butonuna tiklar.
+    And   Siparis notu bolumune yuz karakterden fazla bir not yazar.
+    Then  Uyari mesajini alir
+
+   Scenario: Kayıtlı kart bilgisi ile yeni işlem yapabilmeli.
+     Given Kullanici sepetime tiklar.
+     And   Sipariş ver butonuna tiklar.
+     And   Sakli kart bilgilerimi kullanmak istiyorum kutusunu isaretler.
+     And   Kayitli kartlarindan birini secer.
+     And   Mesafeli satış sozlesmesini isaretler.
+     And   Siparis tamamla butonuna tiklar.
+
+
+  Scenario: Kayıtlı kart bilgisi silinebilmeli.
+    Given Kullanici sepetime tiklar.
+    And   Sipariş ver butonuna tiklar.
+    And   Sakli kart bilgilerimi kullanmak istiyorum kutusunu isaretler.
+    And   Kayitli kartlarindan birini secer.
+    And   Kart bilgimi sil kutusunu isaretler.
+
+
+ Scenario: Yeni kart bilgisi eklenebilmeli.
+   Given Kullanici sepetime tiklar.
+   And   Sipariş ver butonuna tiklar.
+   And   Sakli kart bilgilerimi kullanmak istiyorum kutusunu isaretler.
+   And   Yeni kart ekle butonuna tiklar.
+   And   Yeni kart bilgilerini girer.
+   And   Kart bilgilerimi kaydet butonuna tıklar.
+
+
+
+
+

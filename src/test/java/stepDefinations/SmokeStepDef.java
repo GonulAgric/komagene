@@ -52,7 +52,7 @@ public class SmokeStepDef {
       WebDriverWait wait = new WebDriverWait(Driver.getDriver(),Duration.ofSeconds(5));
       WebElement element = wait.until(ExpectedConditions.elementToBeClickable(smokePage.adresSecimAlani));
         ReusableMethods.click(smokePage.adresSecimAlani);
-        bekle(10);
+        bekle(5);
         click(smokePage.kayitliAdreslerimTest);
         bekle(10);
 

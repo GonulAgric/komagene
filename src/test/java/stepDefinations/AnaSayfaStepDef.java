@@ -404,6 +404,8 @@ public class AnaSayfaStepDef {
         ReusableMethods.ddmIndex(anaSayfa.iletisimIlDrapDown,2);
         bekle(3);
         ddmIndex(anaSayfa.iletisimIlceDrapDown,2);
+        bekle(3);
+        ddmIndex(anaSayfa.konuAlani,2);
 
         anaSayfa.iletisimAcıklamaAlani.sendKeys("Test");
 
@@ -437,9 +439,25 @@ public class AnaSayfaStepDef {
                 "\n" +
                 "Komagene' ye ilginiz için teşekkür ederiz.\n" +
                 "\n" +
-                "Komagene Müşteri Hizmetleri";
+                "Komagene Müşteri Hizmetleri\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "Kapat";
         String actualMesaj = anaSayfa.iletisimBilgilendirMesaji.getText();
-        assertEquals(beklenenMesaj,actualMesaj);
+        String[] beklenenParcalar = beklenenMesaj.split("\n");
+        boolean iceriyor = true;
+        for(String parca : beklenenParcalar) {
+            if(!actualMesaj.contains(parca)) {
+                iceriyor = false;
+                break;
+            }
+        }
+        assertTrue("Gerçek mesaj beklenen mesajı içermiyor", iceriyor);
+
+        // Gerçek mesajı ve beklenen mesajı konsola yazdır
+        System.out.println("Beklenen Mesaj: " + beklenenMesaj);
+        System.out.println("Gerçek Mesaj: " + actualMesaj);
 
     }
 

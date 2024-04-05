@@ -19,7 +19,7 @@ public class AdresStepDef {
 
     @When("Acilan dropdown menuden adreslerime tiklar.")
     public void acilanDropdownMenudenAdreslerimeTiklar() {
-        bekle(2);
+        bekle(5);
         adresEkleme.adreslerimButonu.click();
     }
 
@@ -33,12 +33,14 @@ public class AdresStepDef {
 
     @And("Kullanici baslik butonunu doldurur.")
     public void kullaniciBaslikButonunuDoldurur() {
+        bekle(3);
         adresEkleme.adresBaslikButonu.sendKeys("test");
 
     }
 
     @And("Kullanici adres tipi butonunu doldurur.")
     public void kullaniciAdresTipiButonunuDoldurur() {
+        bekle(3);
         ReusableMethods.ddmIndex(adresEkleme.adresTipiButonu, 1);
 
     }
@@ -52,11 +54,13 @@ public class AdresStepDef {
 
     @And("Kullanici soyad butonunu doldurur.")
     public void kullaniciSoyadButonunuDoldurur() {
+        bekle(3);
         adresEkleme.SoyAdAlaniButonu.sendKeys("Ağrıç");
     }
 
     @And("Kullanici telefon alanini doldurur.")
     public void kullaniciTelefonAlaniniDoldurur() {
+        bekle(3);
         adresEkleme.telefonAlaniButonu.sendKeys("5551126589");
 
     }
@@ -97,18 +101,20 @@ public class AdresStepDef {
 
     @And("Kullanici kat alanini doldurur.")
     public void kullaniciKatAlaniniDoldurur() {
+        bekle(3);
         adresEkleme.katNo.sendKeys("2");
     }
 
     @And("Kullanici daire no alanini doldurur.")
     public void kullaniciDaireNoAlaniniDoldurur() {
+        bekle(3);
         adresEkleme.daireNo.sendKeys("5");
 
     }
 
     @And("Kullanici Adres bilgimi kaydet butonuna tıklar")
     public void kullaniciAdresBilgimiKaydetButonunaTıklar() {
-
+        bekle(3);
         adresEkleme.adresBilgimiKaydetButonu.click();
     }
 
@@ -128,9 +134,10 @@ public class AdresStepDef {
     public void kullaniciUyariMesajiAlmali() {
         bekle(3);
         adresEkleme.adresBaslikButonu.click();
+        bekle(3);
         String actualMesaj = adresEkleme.baslikAlaniHataMesaji.getText();
         String expectedMesaj = "Başlık minimum 2, maksimum 100 karakter olması gerekiyor; girdiğiniz karekter sayısı 1.";
-
+        bekle(3);
         Assert.assertEquals(expectedMesaj, actualMesaj);
     }
 
@@ -145,7 +152,7 @@ public class AdresStepDef {
         String actualMesaj = adresEkleme.adresTipiAlaniHataMesaji.getText();
         String expectedMesaj = "Lütfen adres tipi seçiniz.";
         bekle(5);
-        Assert.assertEquals(expectedMesaj,actualMesaj);
+        Assert.assertEquals(expectedMesaj, actualMesaj);
     }
 
     @Given("Ad butonuna {string} girilir")
@@ -205,9 +212,9 @@ public class AdresStepDef {
     @When("Bilgilerde degişiklik yapar.")
     public void bilgilerdeDegişiklikYapar() {
         bekle(3);
-        adresEkleme.adAlaniButonu.clear();
+        adresEkleme.adAlaniEditButonu.clear();
         bekle(3);
-        adresEkleme.adAlaniButonu.sendKeys("Suay");
+        adresEkleme.adAlaniEditButonu.sendKeys("Suay");
 
 
     }
@@ -237,6 +244,7 @@ public class AdresStepDef {
         for (String[] data : invalidData) {
             // Geçersiz adı gir
             WebElement nameInput = adresEkleme.SoyAdAlaniButonu;
+            bekle(3);
             nameInput.clear();
             nameInput.sendKeys(data[0]);
             bekle(2);
@@ -255,18 +263,89 @@ public class AdresStepDef {
 //       adresEkleme.soyadAlaniHataMesaji.sendKeys(hataMesaji);
 
 
-    @And("Ad butonuna {string} için {string} görüntülenir.")
-    public void adButonunaIçinGörüntülenir(String invalidData, String expectedErrorMessage) {
-        // Soyad butonuna belirli veriyi girme ve hata mesajını kontrol etme kodları
-        WebElement surnameInput = adresEkleme.adAlaniButonu;
-        surnameInput.clear();
-        surnameInput.sendKeys(invalidData);
+    @Then("Ad butonuna gecersiz veri girilir ve hata mesaji alinir.")
+    public void adButonunaGecersizVeriGirilirVeHataMesajiAlinir() {
 
-        // Hata mesajını kontrol et
-        WebElement errorMessage = adresEkleme.adAlaniHataMesaji;
-        String actualErrorMessage = errorMessage.getText();
+        String[][] invalidData = {
+                {"", "Ad alanına özel karakter girmeyiniz."},
+                {"a", "Ad minimum 2, maksimum 15 karakter olması gerekiyor; girdiğiniz karekter sayısı 1."},
+                {"/", "Ad alanına özel karakter girmeyiniz."}
+        };
 
-        // Beklenen hata mesajı ile gerçek hata mesajını karşılaştır
-        Assert.assertEquals("Hata mesajı beklenenden farklı!", expectedErrorMessage, actualErrorMessage);
+        for (String[] data : invalidData) {
+            // Geçersiz adı gir
+            WebElement nameInput = adresEkleme.adAlaniButonu;
+            bekle(3);
+            nameInput.clear();
+            nameInput.sendKeys(data[0]);
+            bekle(2);
+
+            // Hata mesajını kontrol et
+            WebElement errorMessage = adresEkleme.adAlaniHataMesaji;
+            String actualErrorMessage = errorMessage.getText();
+
+            // Beklenen hata mesajı ile gerçek hata mesajını karşılaştır
+            Assert.assertEquals("Hata mesajı beklenenden farklı!", data[1], actualErrorMessage);
+        }
     }
-}
+
+    @Then("Telefon butonuna gecersiz veri girilir ve hata mesaji alinir.")
+    public void telefonButonunaGecersizVeriGirilirVeHataMesajiAlinir() {
+
+
+        String[][] invalidData = {
+                {"", "Telefon alanına numara giriniz."},
+                {"555", "Telefon alanı 10 karekter olması gerekiyor.Karakter sayısı:3"},
+                {"555555555", "Telefon alanı 10 karekter olması gerekiyor.Karakter sayısı:9"}
+        };
+        for (String[] data : invalidData) {
+            // Geçersiz adı gir
+            WebElement nameInput = adresEkleme.telefonAlaniButonu;
+            bekle(3);
+            nameInput.clear();
+            nameInput.sendKeys(data[0]);
+            bekle(2);
+
+            // Hata mesajını kontrol et
+            WebElement errorMessage = adresEkleme.telefonAlaniHataMesaji;
+            String actualErrorMessage = errorMessage.getText();
+            System.out.println(actualErrorMessage);
+
+            // Beklenen hata mesajlarını kontrol et
+            for (int i = 0; i < invalidData.length; i++) {
+                if (data[0].equals(invalidData[i][0])) {
+                    Assert.assertEquals("Hata mesajı beklenenden farklı!", data[1], actualErrorMessage);
+                    break;
+                }
+            }
+
+
+        }
+    }
+
+    @Then("Bina no butonuna gecersiz veri girilir ve hata mesaji alinir.")
+    public void binaNoButonunaGecersizVeriGirilirVeHataMesajiAlinir() {
+
+        String[][] invalidData = {
+                {" ", "Bina No alanına sadece numara,harf veya \"-\" ve \"/\" karakteri girebilirsiniz."},
+                {"?", "Bina No alanına sadece numara,harf veya \"-\" ve \"/\" karakteri girebilirsiniz."},
+
+        };
+        for (String[] data : invalidData) {
+            // Geçersiz veriyi gir
+            WebElement inputField = adresEkleme.binaNo;
+            bekle(3);
+            inputField.clear();
+            inputField.sendKeys(data[0]);
+            bekle(3);
+
+            // Hata mesajını kontrol et
+            WebElement errorMessage = adresEkleme.binaNoAlaniHataMesaji;
+            String actualErrorMessage = errorMessage.getText();
+            System.out.println(actualErrorMessage);
+
+            // Beklenen hata mesajını kontrol et
+            Assert.assertEquals("Hata mesajı beklenenden farklı!", data[1], actualErrorMessage);
+        }
+        }
+    }
