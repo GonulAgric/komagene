@@ -2,6 +2,7 @@ package stepDefinations;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.Select;
 import pages.OdemePage;
@@ -158,5 +159,9 @@ public class OdemeStepDef {
     public void kartBilgilerimiKaydetButonunaTıklar() {
         bekle(3);
         odeme.kartBilgimiKaydet.click();
+    }
+
+    @When("Kapıda odeme secenegine tiklar.")
+    public void kapıdaOdemeSecenegineTiklar() {
     }
 }

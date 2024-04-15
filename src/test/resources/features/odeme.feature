@@ -61,13 +61,25 @@ Feature: Odeme
     And   Kart bilgimi sil kutusunu isaretler.
 
 
- Scenario: Yeni kart bilgisi eklenebilmeli.
+  Scenario: Yeni kart bilgisi eklenebilmeli.
    Given Kullanici sepetime tiklar.
    And   Sipariş ver butonuna tiklar.
    And   Sakli kart bilgilerimi kullanmak istiyorum kutusunu isaretler.
    And   Yeni kart ekle butonuna tiklar.
    And   Yeni kart bilgilerini girer.
    And   Kart bilgilerimi kaydet butonuna tıklar.
+
+  Scenario: Kullanıcı kapıda nakit ödeme yapabilmeli.
+    Given Kullanici sepetime tiklar.
+    And   Sipariş ver butonuna tiklar.
+    When  Kapıda odeme secenegine tiklar.
+    And   Odeme yontemi seciniz dropdown menuden nakit odemeye tiklar.
+    And   Mesafeli satış sozlesmesini isaretler.
+    And   Siparis tamamla butonuna tiklar.
+    Then  Siparisin tamamlandigini dogrular.
+
+
+
 
 
 
