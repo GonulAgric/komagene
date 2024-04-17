@@ -149,9 +149,3 @@ Feature: Odeme
 
 
 
-
-
-
-
-
-
