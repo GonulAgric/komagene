@@ -133,6 +133,8 @@ public class SepetimStepDef {
     public void ekledigiUrununAdetSayisiniArttirir() {
         bekle(3);
         sepetim.sepetteAdetArttirma.click();
+        bekle(3);
+        sepetim.sepetteAdetArttirma.click();
     }
 
     @Then("Adet sayisinin arttirildigini dogrular.")

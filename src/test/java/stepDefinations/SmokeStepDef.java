@@ -54,7 +54,7 @@ public class SmokeStepDef {
         ReusableMethods.click(smokePage.adresSecimAlani);
         bekle(5);
         click(smokePage.kayitliAdreslerimTest);
-        bekle(10);
+        bekle(20);
 
       List<WebElement> subeler = Driver.getDriver().findElements(By.cssSelector(".subeListItem"));
 
@@ -184,6 +184,7 @@ public class SmokeStepDef {
 
     @And("Mesafeli satış sozlesmesini isaretler.")
     public void mesafeliSatışSozlesmesiniIsaretler() {
+        bekle(3);
         smokePage.mesafeliSatış.click();
     }
 

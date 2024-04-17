@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import pages.OdemePage;
 import pages.SmokePage;
 
-import static utilities.ReusableMethods.bekle;
+import static utilities.ReusableMethods.*;
 
 public class OdemeStepDef {
 
@@ -124,8 +124,8 @@ public class OdemeStepDef {
 
     @And("Siparis tamamla butonuna tiklar.")
     public void siparisTamamlaButonunaTiklar() {
-        bekle(3);
-        smokePage.siparisiTamamla.click();
+        bekle(5);
+        odeme.siparisiTamamlaButton.click();
     }
 
     @And("Kart bilgimi sil kutusunu isaretler.")
@@ -163,5 +163,92 @@ public class OdemeStepDef {
 
     @When("Kapıda odeme secenegine tiklar.")
     public void kapıdaOdemeSecenegineTiklar() {
+        bekle(3);
+        odeme.kapidaOdeme.click();
+    }
+
+    @And("Odeme yontemi seciniz dropdown menuden nakit odemeye tiklar.")
+    public void odemeYontemiSecinizDropdownMenudenNakitOdemeyeTiklar() {
+        bekle(3);
+        ddmIndex(odeme.odemeYontemiDropDown,1);
+    }
+
+    @And("Acilan adres degistir sayfasini kapatir.")
+    public void acilanAdresDegistirSayfasiniKapatir() {
+        bekle(3);
+        odeme.adresDegistirSAyfasiKapatmaButonu.click();
+    }
+
+    @And("Mesafeli satış sozlesmesi butonunu isaretler.")
+    public void mesafeliSatışSozlesmesiButonunuIsaretler() {
+        bekle(3);
+        odeme.mesafeliSatisSözlesmesi.click();
+    }
+
+    @Then("Siparisin tamamlandigini dogrular.")
+    public void siparisinTamamlandiginiDogrular() {
+        bekle(3);
+        String text=odeme.siparisAlindiPopUp.getText();
+        System.out.println(text);
+        bekle(3);
+        Assert.assertTrue(text.contains("Siparişiniz alındı."));
+    }
+
+    @And("Odeme yontemi secmez.")
+    public void odemeYontemiSecmez() {
+        
+    }
+
+    @Then("Uyari mesaji almali.")
+    public void uyariMesajiAlmali() {
+        bekle(3);
+        String text= odeme.odemeYontemiUyariMesaji.getText();
+        System.out.println(text);
+        bekle(3);
+        Assert.assertTrue(text.contains("Lütfen ödeme yöntemi seçiniz."));
+    }
+
+    @And("Mesafeli satis sozlesmesini bos birakir.")
+    public void mesafeliSatisSozlesmesiniBosBirakir() {
+        
+    }
+
+
+    @Then("Kullanici uyari mesajini alir.")
+    public void kullaniciUyariMesajiniAlir() {
+        bekle(3);
+        String text= odeme.mesafeliSatisSozlesmesiUyariMesaji.getText();
+        System.out.println(text);
+        bekle(3);
+        Assert.assertTrue(text.contains("Lütfen mesafeli satış sözleşmesini okduğunuzu belirtiniz."));
+    }
+
+    @And("Odeme yontemi seciniz dropdown menuden kredi karti ile odemeye tiklar.")
+    public void odemeYontemiSecinizDropdownMenudenKrediKartiIleOdemeyeTiklar() {
+        bekle(5);
+        ddmIndex(odeme.odemeYontemiDropDown,2);
+
+    }
+
+    @And("Kayitli kartlarindan birini ekler.")
+    public void kayitliKartlarindanBiriniEkler() {
+        //Kart bilgileri gelince yazılacak
+    }
+
+    @Then("Kayitli karti tekrar kaydedince uyari mesaji alir.")
+    public void kayitliKartiTekrarKaydedinceUyariMesajiAlir() {
+        //Sistem fake kart bilgilerini kabul etmiyor.Hata çözülünce yazılacak.
+    }
+
+    @And("Siparis notu bolumune alici ve telefon bilgisi girer.")
+    public void siparisNotuBolumuneAliciVeTelefonBilgisiGirer() {
+        bekle(3);
+        click(odeme.farkliBirAliciGirmekIstiyorum);
+        bekle(3);
+        odeme.farkliBirAliciGirmekIstiyorumAdAlani.sendKeys("Ayşe");
+        bekle(3);
+        odeme.farkliBirAliciGirmekIstiyorumTelefonAlani.sendKeys("5461127610");
+        bekle(2);
+        odeme.farkliBirAliciGirmekIstiyorumTamamButton.click();
     }
 }

@@ -72,4 +72,48 @@ public class OdemePage {
     @FindBy(xpath = "//*[@id=\"txtCvv\"]")
     public WebElement yeniKartEkleCvv;
 
+    @FindBy(xpath = "//*[@id=\"nav-kapida-odeme-tab\"]")
+    public WebElement kapidaOdeme;
+
+    @FindBy(xpath = "//*[@id=\"nav-kapida-odeme\"]/div[1]/div/div/select")
+    public WebElement odemeYontemiDropDown;
+
+    @FindBy(xpath = "//*[@id=\"addressChooseForm\"]/div/div/div[1]/button")
+    public WebElement adresDegistirSAyfasiKapatmaButonu;
+
+    @FindBy(xpath = "//*[@id=\"nav-kapida-odeme\"]/div[3]/div/label/span")
+    public WebElement mesafeliSatisSözlesmesi;
+
+    @FindBy(xpath = "//*[text()=\"Siparişiniz alındı.\"]")
+    public WebElement siparisAlindiPopUp;
+
+    @FindBy(xpath = "//*[@id=\"nav-kapida-odeme\"]/div[5]/div[2]/button")
+    public WebElement siparisiTamamlaButton;
+
+
+    @FindBy(xpath = "//*[text()=\"Lütfen ödeme yöntemi seçiniz.\"]")
+    public WebElement odemeYontemiUyariMesaji;
+
+
+    @FindBy(xpath = "//*[text()=\"Lütfen mesafeli satış sözleşmesini okduğunuzu belirtiniz.\"]")
+    public WebElement mesafeliSatisSozlesmesiUyariMesaji;
+
+
+    @FindBy(xpath = "//a[contains(text(),'Farklı bir alıcı girmek istiyorum.')]")
+    public WebElement farkliBirAliciGirmekIstiyorum;
+
+
+    @FindBy(xpath = "//*[@id=\"txtAliciAdiSoyadi\"]")
+    public WebElement farkliBirAliciGirmekIstiyorumAdAlani;
+
+
+    @FindBy(xpath = "//*[@id=\"txtAliciTelefon\"]")
+    public WebElement farkliBirAliciGirmekIstiyorumTelefonAlani;
+
+
+    @FindBy(xpath = "(//*[@class=\"d-block w-100 odemeGeriButonu\"])[4]")
+    public WebElement farkliBirAliciGirmekIstiyorumTamamButton;
+
+
+
 }

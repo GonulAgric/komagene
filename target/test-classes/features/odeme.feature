@@ -61,13 +61,95 @@ Feature: Odeme
     And   Kart bilgimi sil kutusunu isaretler.
 
 
- Scenario: Yeni kart bilgisi eklenebilmeli.
+  Scenario: Yeni kart bilgisi eklenebilmeli.
    Given Kullanici sepetime tiklar.
    And   Sipariş ver butonuna tiklar.
    And   Sakli kart bilgilerimi kullanmak istiyorum kutusunu isaretler.
    And   Yeni kart ekle butonuna tiklar.
    And   Yeni kart bilgilerini girer.
    And   Kart bilgilerimi kaydet butonuna tıklar.
+
+  Scenario: Kullanıcı kapıda nakit ödeme yapabilmeli.
+    Given Kullanici sepetime tiklar.
+    When  Ekledigi urunun adet sayisini arttirir.
+    And   Sipariş ver butonuna tiklar.
+    Given Kullanici sayfanin sol üst kösesindeki  teslimat turune tiklar.
+    When  Acilan sayfada paket servis secenegine tiklar.
+    And   Secili teslimat turu ile devam et butonuna tiklar.
+    And   Acilan adres degistir sayfasini kapatir.
+    When  Kapıda odeme secenegine tiklar.
+    And   Odeme yontemi seciniz dropdown menuden nakit odemeye tiklar.
+    And   Mesafeli satış sozlesmesi butonunu isaretler.
+    And   Siparis tamamla butonuna tiklar.
+    Then  Siparisin tamamlandigini dogrular.
+
+   Scenario: Kullanıcı ödeme yöntemi seçmediğinde uyarı mesajı almalı.
+     Given Kullanici sepetime tiklar.
+     And   Sipariş ver butonuna tiklar.
+     Given Kullanici sayfanin sol üst kösesindeki  teslimat turune tiklar.
+     When  Acilan sayfada paket servis secenegine tiklar.
+     And   Secili teslimat turu ile devam et butonuna tiklar.
+     And   Acilan adres degistir sayfasini kapatir.
+     When  Kapıda odeme secenegine tiklar.
+     And   Odeme yontemi secmez.
+     And   Mesafeli satış sozlesmesi butonunu isaretler.
+     And   Siparis tamamla butonuna tiklar.
+     Then  Uyari mesaji almali.
+
+
+     Scenario: Kullanıcı mesafeli satış sözleşmesini işaretlemediğinde uyarı mesajı almalı.
+       Given Kullanici sepetime tiklar.
+       And   Sipariş ver butonuna tiklar.
+       Given Kullanici sayfanin sol üst kösesindeki  teslimat turune tiklar.
+       When  Acilan sayfada paket servis secenegine tiklar.
+       And   Secili teslimat turu ile devam et butonuna tiklar.
+       And   Acilan adres degistir sayfasini kapatir.
+       When  Kapıda odeme secenegine tiklar.
+       And   Odeme yontemi seciniz dropdown menuden nakit odemeye tiklar.
+       And   Mesafeli satis sozlesmesini bos birakir.
+       And   Siparis tamamla butonuna tiklar.
+       Then  Kullanici uyari mesajini alir.
+
+
+
+     Scenario: Kullanıcı sipariş tesliminde kredi kartı veya banka kartı ile kapıda ödeme yapabilmeli.
+       Given Kullanici sepetime tiklar.
+       And   Sipariş ver butonuna tiklar.
+       Given Kullanici sayfanin sol üst kösesindeki  teslimat turune tiklar.
+       When  Acilan sayfada paket servis secenegine tiklar.
+       And   Secili teslimat turu ile devam et butonuna tiklar.
+       And   Acilan adres degistir sayfasini kapatir.
+       When  Kapıda odeme secenegine tiklar.
+       And   Odeme yontemi seciniz dropdown menuden kredi karti ile odemeye tiklar.
+       And   Mesafeli satış sozlesmesi butonunu isaretler.
+       And   Siparis tamamla butonuna tiklar.
+       Then  Siparisin tamamlandigini dogrular.
+
+
+       Scenario: Kullanıcı  aynı kartı tekrar kaydettiğinde uyarı mesajı almalı.
+         Given Kullanici sepetime tiklar.
+         And   Sipariş ver butonuna tiklar.
+         And   Sakli kart bilgilerimi kullanmak istiyorum kutusunu isaretler.
+         And   Yeni kart ekle butonuna tiklar.
+         And   Kayitli kartlarindan birini ekler.
+         Then  Kayitli karti tekrar kaydedince uyari mesaji alir.
+
+
+       Scenario: Kullanıcı sipariş notu kısmına  alıcı ve telefon bilgisi girebilmeli.
+         Given Kullanici sepetime tiklar.
+         And   Sipariş ver butonuna tiklar.
+         And   Siparis notu bolumune alici ve telefon bilgisi girer.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
