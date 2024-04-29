@@ -251,4 +251,48 @@ public class OdemeStepDef {
         bekle(2);
         odeme.farkliBirAliciGirmekIstiyorumTamamButton.click();
     }
+
+    @Then("Siparis notu bolumune alici ve telefon bilgisinin geldigini dogrular.")
+    public void siparisNotuBolumuneAliciVeTelefonBilgisininGeldiginiDogrular() {
+        String text= odeme.siparisNotu.getText();
+        System.out.println(text);
+        Assert.assertTrue(text.contains("Alıcı Adı Soyadı:Ayşe, Alıcı Telefon:5461127610"));
+    }
+
+    @And("Sepetin minimum sepet tutarının altında kaldığını görür.")
+    public void sepetinMinimumSepetTutarınınAltındaKaldığınıGörür() {
+        bekle(3);
+        String sepetTutariMetni = odeme.sepetTutari.getText();
+        System.out.println("sepetTutariMetni = " + sepetTutariMetni);
+        // Metni uygun şekilde parçalayarak sadece sayısal değeri al
+        String[] parts = sepetTutariMetni.split("\n"); // Metni "SEPET TUTARI" ibaresinden bölelim
+        String sepetTutariSayisi = parts[1].replace("TL", "").trim(); // "TL" ibaresini kaldırıp boşlukları temizleyelim
+
+        // Sepet tutarını double türüne çevir
+        double sepetTutari = Double.parseDouble(sepetTutariSayisi);
+
+        // Minimum sepet tutarı
+        double hedefTutar = 65.0; // Hedef minimum sepet tutarı, istediğiniz değere göre değiştir
+        bekle(5);
+        odeme.siparisVer.click();
+        // Minimum sepet tutarını kontrol et
+        if (sepetTutari < hedefTutar) {
+            System.out.println("Uyarı: Sepet tutarı 65 TL'nin altında!");
+            // Eğer sepet tutarı hedef tutardan küçükse, uyarı mesajını kontrol et
+            bekle(10);
+            click(odeme.siparisVer);
+            bekle(5);
+            String uyariMesajiIçeriyorMu = odeme.sepetTutariUyariPoup.getText();
+            Assert.assertTrue("Uyarı mesajı beklenen metni içermiyor: " + uyariMesajiIçeriyorMu, uyariMesajiIçeriyorMu.contains("Toplam tutar, minimum sipariş tutarından küçük."));
+        } else {
+            System.out.println("Sepet tutarı 65 TL veya daha fazla.");
+        }
+
+    }
+
+    @And("Sipariş ver butonuna tiklar")
+    public void siparişVerButonunaTiklar() {
+        bekle(3);
+      click( odeme.siparisVer);
+    }
 }

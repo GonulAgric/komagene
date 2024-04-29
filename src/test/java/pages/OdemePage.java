@@ -115,5 +115,19 @@ public class OdemePage {
     public WebElement farkliBirAliciGirmekIstiyorumTamamButton;
 
 
+    @FindBy(xpath = "//*[@id=\"main-wrapper\"]/article[2]/div/div/div[2]/div[1]/div[7]")
+    public WebElement sepetTutari;
+
+
+
+    @FindBy(xpath = "(//*[text()=\"Toplam tutar, minimum sipariş tutarından küçük.\"])[1]")
+    public WebElement sepetTutariUyariPoup;
+
+
+    @FindBy(xpath = "//button[@value='ÖDEME']")
+    public WebElement siparisVer;
+
+
+
 
 }

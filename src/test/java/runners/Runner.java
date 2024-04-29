@@ -27,7 +27,7 @@ import java.util.List;
         glue = {"stepDefinations"},
         dryRun = true,
 
-        tags = "@odeme"
+        tags = "@aramaButonu"
 )
 public class Runner {
         // Tüm senaryoların çalıştırılmasının ardından yapılacak işlemler

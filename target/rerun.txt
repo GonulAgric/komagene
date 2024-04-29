@@ -1,1 +1,1 @@
-file:src/test/resources/features/odeme.feature:4
+file:src/test/resources/features/aramaButonu.feature:6

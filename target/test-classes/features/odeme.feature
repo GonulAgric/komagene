@@ -30,7 +30,7 @@ Feature: Odeme
     Given Kullanici sepetime tiklar.
     And   Sipariş ver butonuna tiklar.
     And   Gecersiz kart bilgileri girer
-    And Siparisi tamamla butonuna tiklar.
+    And   Siparisi tamamla butonuna tiklar.
     Then  Uyari mesaji alir.
 
   Scenario: Sipariş notu bölümüne 100 karakterden az sipariş notu girilmeli.
@@ -139,6 +139,15 @@ Feature: Odeme
          Given Kullanici sepetime tiklar.
          And   Sipariş ver butonuna tiklar.
          And   Siparis notu bolumune alici ve telefon bilgisi girer.
+         Then  Siparis notu bolumune alici ve telefon bilgisinin geldigini dogrular.
+
+       Scenario: Kullanıcı minumum sepet tutarının altında ödeme yaptığında uyarı mesajı almalı.
+         Given Kullanici sepetime tiklar.
+         Given Kullanici sayfanin sol üst kösesindeki  teslimat turune tiklar.
+         When  Acilan sayfada paket servis secenegine tiklar.
+         And   Secili teslimat turu ile devam et butonuna tiklar.
+         And   Acilan adres degistir sayfasini kapatir.
+         And   Sepetin minimum sepet tutarının altında kaldığını görür.
 
 
 
@@ -148,6 +157,11 @@ Feature: Odeme
 
 
 
+
+
+
+
+# Kart bilgileri olmadığı için 3 case yazılmadı, 2 test casede yarım kaldı.
 
 
 

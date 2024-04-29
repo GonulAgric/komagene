@@ -26,6 +26,6 @@ Feature: Favorilerim
 
 
 
-
+# Favori listesinden ürün çıkarılabilmeli.  // Bu senaryo yazılacak.
 
 

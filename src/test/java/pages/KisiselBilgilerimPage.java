@@ -41,7 +41,7 @@ public class KisiselBilgilerimPage {
     @FindBy(xpath = "(//div[@class='container'])[10]")
     public WebElement adresBilgisiAlani;
 
-    @FindBy(xpath = "(//div[@class='modal-dialog modal-md'])[25]")
+    @FindBy(xpath = "//div[text()='Profil bilgileriniz başarılı bir şekilde güncellendi.']")
     public WebElement kBguncellemePopUp;
 
     @FindBy(xpath = "(//button[@class='btn-close'])[26]")
