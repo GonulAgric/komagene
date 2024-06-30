@@ -1,1 +1,1 @@
-file:src/test/resources/features/aramaButonu.feature:6
+file:src/test/resources/features/kampanyalar.feature:7

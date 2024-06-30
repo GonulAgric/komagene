@@ -52,3 +52,23 @@ Background:
     Given Kullanici sepetime tiklar.
     When  Ekledigi urunun adet sayisini azaltir.
     Then  Adet sayisinin azaldigini dogrular.
+
+  Scenario: Kullanıcı Sepetteki toplam tutarın, eklenen ürünlerin fiyatlarına göre doğru bir şekilde hesaplanıp hesaplanmadığını doğrulamalı.
+    Given Kullanici sepetime tiklar.
+    When  Sepet sayfasinda toplam tutarin dogru hesaplandigini dogrular.
+  Scenario: Kullanıcı sepetten ürün çıkardığında, toplam tutar güncellenmeli.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

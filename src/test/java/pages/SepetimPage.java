@@ -83,6 +83,10 @@ public class SepetimPage {
     public WebElement urunSayisiAzaltmaPopUp;
 
 
+    @FindBy(xpath = "//*[@id=\"main-wrapper\"]/article[2]/div/div/div[1]")
+    public WebElement sepetUrun;
+
+
 
 
 }

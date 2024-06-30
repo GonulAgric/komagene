@@ -14,6 +14,7 @@ import utilities.Driver;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
+import java.util.List;
 
 import static utilities.ReusableMethods.*;
 
@@ -164,6 +165,54 @@ public class SepetimStepDef {
         System.out.println("poupText:"+poupText);
         bekle(5);
        Assert.assertTrue(poupText.contains("Miktar 1 den küçük olamaz"));
+
+    }
+
+    @When("Sepet sayfasinda toplam tutarin dogru hesaplandigini dogrular.")
+    public void sepetSayfasindaToplamTutarinDogruHesaplandiginiDogrular() {
+        // Ürün fiyatlarını içeren elementleri bulma
+        List<WebElement> products = Driver.getDriver().findElements(By.cssSelector("div.col-md-4.align-items-start.flex-column.align-text-top"));
+
+        double total = 0;
+
+// Her bir ürünün fiyatını toplama
+        for (int i = 0; i < products.size(); i++) {
+          String priceText = products.get(i).getText();//37.50 TL
+           double price = Double.parseDouble(priceText.substring(2));
+           total += price;
+      }
+
+
+
+// Sepet toplamını içeren elementi bulma ve fiyatı alıp sayısal değere dönüştürme
+        bekle(5);
+        WebElement totalAmountElement = Driver.getDriver().findElement(By.cssSelector("#main-wrapper > article:nth-child(3) > div > div > div.col-md-3 > div.d-block.w-100 > div:nth-child(5) > div.col-md-6.text-end"));
+        bekle(5);
+        String totalAmountText = totalAmountElement.getText().replace("$", "").replace("TL", "").trim(); // Fiyat metninden "$" ve "TL" işaretlerini kaldırma
+        bekle(3);
+        double totalAmount = Double.parseDouble(totalAmountText);
+
+// Toplam değerleri karşılaştırma
+
+        Assert.assertEquals("Sepetteki ürünlerin toplamı ile sepet tutarı eşleşmiyor!", total, totalAmount);
+
+// Test sonuçlarını yazdırma
+        System.out.println("Hesaplanan toplam: $" + total);
+        System.out.println("Sepet toplamı: $" + totalAmount);
+
+//        List<WebElement> products = driver.findElements(AppiumBy.id("com.androidsample.generalstore:id/productPrice"));
+//        Assert.assertEquals(products.size(), 2);
+//
+//        double total = 0;
+//        for (int i = 0; i < products.size(); i++) {
+//            String priceText = products.get(i).getText(); // $160.97 --> $120.0
+//            double price = Double.parseDouble(priceText.substring(1)); // 160.97  --> 120.0
+//            total += price;
+//        }
+//
+//        double totalAmount = Double.parseDouble(driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/totalAmountLbl")).getText().substring(1));
+//
+//        Assert.assertEquals(total, totalAmount);
 
     }
 }
