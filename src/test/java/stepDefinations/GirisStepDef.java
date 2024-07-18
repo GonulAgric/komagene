@@ -65,7 +65,7 @@ public class GirisStepDef {
         System.out.println("Status Code: " + statusCode);
         System.out.println("Response Body: " + responseBody);
 
-        bekle(5);
+        bekle(10);
         uyeOlPage.dogrulama.sendKeys(responseBody);
        // loginPage.girisYapAllert.click();
     }

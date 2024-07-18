@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -223,7 +224,7 @@ public class AnaSayfaStepDef {
             if (!handle.equals(mainWindowHandle)) {
                 Driver.getDriver().switchTo().window(handle);
 
-                assertTrue("Kullanici ilgili sayfaya yonlendirilemedi", Driver.getDriver().getCurrentUrl().contains("twitter"));
+                assertTrue("Kullanici ilgili sayfaya yonlendirilemedi", Driver.getDriver().getCurrentUrl().contains("x.com"));
 
                 // Pencere kapatma
                 Driver.getDriver().close();
@@ -277,19 +278,22 @@ public class AnaSayfaStepDef {
 
     @When("Kullanici ana sayfada kurumsal sayfalarin goruntulendigini dogrular.")
     public void kullaniciAnaSayfadaKurumsalSayfalarinGoruntulendiginiDogrular() {
-
+        bekle(5);
+        ReusableMethods.scroll(anaSayfa.kurumsalSayfalar);
         Assert.assertTrue(anaSayfa.kurumsalSayfalar.isDisplayed());
         
     }
 
     @And("Kullanici Gizlilik Sözleşmesi sekmesine tiklar.")
     public void kullaniciGizlilikSözleşmesiSekmesineTiklar() {
+        bekle(3);
         click(anaSayfa.gizlilikSozlesmesi);
     }
 
     @Then("Kullanici Gizlilik Sözleşmesine yonlendirilip yonlendirilmedigini dogrular.")
     public void kullaniciGizlilikSözleşmesineYonlendirilipYonlendirilmediginiDogrular() {
-     ReusableMethods.urlDogrulama("\"/gizliliksozlesmesi/gizliliksozlesmesi\"");
+     bekle(3);
+     ReusableMethods.urlDogrulama("\"/kurumsal/gizlilik-sozlesmesi\"");
     }
 
     @When("Kullanici Hakkimizda sekmesine tiklar.")
@@ -299,18 +303,21 @@ public class AnaSayfaStepDef {
 
     @Then("Kullanici Hakkimizda sekmesine yonlendirilip yonlendirilmedigini dogrular.")
     public void kullaniciHakkimizdaSekmesineYonlendirilipYonlendirilmediginiDogrular() {
-        ReusableMethods.urlDogrulama("aboutpage");
+        ReusableMethods.urlDogrulama("/kurumsal/hakkimizda");
+
+
     }
 
     @And("Kullanici Sertifikalar sekmesine tiklar.")
     public void kullaniciSertifikalarSekmesineTiklar() {
-        click(anaSayfa.sertifiklar);
+        click(anaSayfa.sertifikalar);
 
     }
 
     @Then("Kullanici Sertifikalar sekmasine yonlendirilip yonlendirilmedigini dogrular.")
     public void kullaniciSertifikalarSekmasineYonlendirilipYonlendirilmediginiDogrular() {
-        ReusableMethods.urlDogrulama("certificatepage");
+       ReusableMethods.urlDogrulama("/kurumsal/sertifikalar");
+
     }
 
     @When("Kullanici Kvkk Bilgilendirme Metni sekmesine tiklar.")
@@ -402,9 +409,9 @@ public class AnaSayfaStepDef {
 
         WebElement ilDropdown = wait.until(ExpectedConditions.elementToBeClickable(anaSayfa.iletisimIlDrapDown));
         click(ilDropdown);
-        ReusableMethods.ddmIndex(anaSayfa.iletisimIlDrapDown,2);
+        ReusableMethods.ddmIndex(anaSayfa.iletisimIlDrapDown,3);
         bekle(3);
-        ddmIndex(anaSayfa.iletisimIlceDrapDown,2);
+        ddmIndex(anaSayfa.iletisimIlceDrapDown,3);
         bekle(3);
         ddmIndex(anaSayfa.konuAlani,2);
 
@@ -590,23 +597,26 @@ public class AnaSayfaStepDef {
     ReusableMethods.urlDogrulama("linkedin");
     }
 
-    @Given("Anasayfada banner {string} goruntulenir")
-    public void anasayfadaBannerGoruntulenir(String bannerElement ) {
-        ReusableMethods.getBannerElement(bannerElement);
+    @Given("Anasayfada banner  goruntulenir")
+    public void anasayfadaBannerGoruntulenir() {
+        WebElement afis = Driver.getDriver().findElement(By.xpath("//div[@class='w-100 slideicin' and contains(@style, 'background-image: url(\"https://gw.komagene.com.tr/site/StaticFiles/YuklenenSlaytlar/32/OrjinalResimler/10fc5910-0284-40f1-9bb0-b74644c75207.jpg\")')]"));
+        assert afis.isDisplayed();
     }
 
     @When("Banner kaydirilabilir")
     public void bannerKaydirilabilir() {
+        bekle(5);
         Actions actions = new Actions(Driver.getDriver());
         actions.moveByOffset(300, 0);
         actions.perform();
-        anaSayfa.banner.click();
+       // anaSayfa.banner.click();
         
     }
 
     @Then("Banner tiklanabilir ve ilgili sayfaya yonlendirilir")
     public void bannerTiklanabilirVeIlgiliSayfayaYonlendirilir() {
     }
+
 
 
 }

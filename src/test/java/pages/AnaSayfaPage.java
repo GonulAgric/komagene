@@ -62,42 +62,45 @@ public class AnaSayfaPage {
     public WebElement youtube;
 
 
-    @FindBy(xpath = "//*[@class='col-md-2 yaziRengiBeyaz kurumsalLinkler  d-none d-sm-block']")
+    @FindBy(xpath = "(//div[contains(@class, 'kurumsalLinkler')][1])")
     public WebElement kurumsalSayfalar;
 
 
-
-    @FindBy(xpath = "(//*[@rel='noreferrer'])[16]")
+    @FindBy(xpath = "//div[@class='col-md-2 yaziRengiBeyaz kurumsalLinkler  d-none d-sm-block']//a[text()='Gizlilik Sözleşmesi']")
     public WebElement gizlilikSozlesmesi;
 
-    @FindBy(xpath = "(//*[@rel='noreferrer'])[15]")
+
+    @FindBy(xpath = "//div[@class='col-md-2 yaziRengiBeyaz kurumsalLinkler  d-none d-sm-block']//a[text()='Hakkımızda']")
     public WebElement hakkimizda;
 
 
-    @FindBy(xpath = "(//*[@rel='noreferrer'])[21]")
-    public WebElement sertifiklar;
+
+    @FindBy(xpath = "//div[@class='col-md-2 yaziRengiBeyaz kurumsalLinkler  d-none d-sm-block']//a[text()='Sertifikalar']")
+    public WebElement sertifikalar;
 
 
-    @FindBy(xpath = "(//*[@rel='noreferrer'])[17]")
+
+    @FindBy(xpath = "//a[contains(@href, '/kurumsal/kvkk')]")
     public WebElement KvkkBilgilendirmeMetni;
 
-   @FindBy(xpath = "(//*[@rel='noreferrer'])[22]")
+    @FindBy(xpath = "//a[contains(@href, '/kurumsal/iletisim')]")
     public WebElement iletisim;
 
 
-   @FindBy(xpath = "(//*[@rel='noreferrer'])[18]")
+    @FindBy(xpath = "//a[contains(@href, '/kurumsal/mesafelisatissozlesmesi')]")
     public WebElement MesafeliSatisSozlesmesi;
 
 
-   @FindBy(xpath = "(//*[@rel='noreferrer'])[23]")
+    @FindBy(xpath = "//a[contains(@href, '/kurumsal/franchisebasvurusu')]")
     public WebElement franchiseBasvuru;
 
 
-   @FindBy(xpath = "(//*[@rel='noreferrer'])[20]")
+    @FindBy(xpath = "//a[contains(@href, '/kurumsal/insan-kaynaklari')]")
     public WebElement insanKaynaklari;
 
 
-   @FindBy(xpath = "(//*[@rel='noreferrer'])[19]")
+
+    @FindBy(xpath = "//a[contains(@href, '/kurumsal/uyelik-kosullari')]")
     public WebElement UyelikKosullari;
 
 

@@ -25,9 +25,9 @@ import java.util.List;
         monochrome = true,
         features = "src/test/resources/features",
         glue = {"stepDefinations"},
-        dryRun = true,
+        dryRun = false,
 
-        tags = "@kampanyalar"
+        tags = "@smoke"
 )
 public class Runner {
         // Tüm senaryoların çalıştırılmasının ardından yapılacak işlemler

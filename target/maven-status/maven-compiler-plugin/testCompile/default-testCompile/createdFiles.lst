@@ -15,11 +15,13 @@ hooks\Hook.class
 runners\Runner.class
 utilities\Driver.class
 stepDefinations\SiparislerimStepDef.class
+pages\KampanyalarPage.class
 pages\SiparislerimPage.class
 stepDefinations\SepetimStepDef.class
 stepDefinations\AnaSayfaStepDef.class
 pages\AramaButonuPages.class
 stepDefinations\GirisStepDef.class
+stepDefinations\KampanyalarStepDef.class
 pages\AdreslerimPage.class
 stepDefinations\AdresStepDef.class
 stepDefinations\KisiselBilgilerimStepDef.class

@@ -304,29 +304,30 @@ public class ReusableMethods {
     }
 
 
+            public static void urlDogrulama (String expectedUrlFragment){
+                String mainWindowHandle = Driver.getDriver().getWindowHandle();
 
-        public static void urlDogrulama(String text) {
-            String mainWindowHandle = Driver.getDriver().getWindowHandle();
+                Set<String> allWindowHandles = Driver.getDriver().getWindowHandles();
+                for (String handle : allWindowHandles) {
+                    if (!handle.equals(mainWindowHandle)) {
+                        Driver.getDriver().switchTo().window(handle);
 
-            Set<String> allWindowHandles = Driver.getDriver().getWindowHandles();
-            for (String handle : allWindowHandles) {
-                if (!handle.equals(mainWindowHandle)) {
-                    Driver.getDriver().switchTo().window(handle);
+                        // Sayfanın yüklenmesini bekleyin
+//                        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(30)); // Bekleme süresini artırdık
+//                        wait.until(ExpectedConditions.urlContains(expectedUrlFragment));
+                        bekle(10);
+                        assertTrue("Kullanici ilgili sayfaya yonlendirilemedi", Driver.getDriver().getCurrentUrl().contains(expectedUrlFragment));
+                        bekle(10);
+                        // Pencere kapatma
+                        Driver.getDriver().close();
 
-                    // Sayfanın yüklenmesini bekleyin
-                    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-                    wait.until(ExpectedConditions.urlContains(text));
-
-                    assertTrue("Kullanici ilgili sayfaya yonlendirilemedi", Driver.getDriver().getCurrentUrl().contains(text));
-                    bekle(10);
-                    // Pencere kapatma
-                    Driver.getDriver().close();
-
-                    // Ana pencereye geri dön
-                    Driver.getDriver().switchTo().window(mainWindowHandle);
+                        // Ana pencereye geri dön
+                        Driver.getDriver().switchTo().window(mainWindowHandle);
+                    }
                 }
             }
-        }
+
+
 
     public static WebElement getBannerElement(String bannerId) {
         By bannerLocator = By.id(bannerId);

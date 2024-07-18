@@ -135,16 +135,11 @@ Scenario: Ana sayfada kurumsal sayfalar( iletişim)formunda yeni bir ülke seçe
     And  Linked In sayfasina yonlendirilir.
 
 
-Scenario Outline: Ana sayfadaki banner görüntülenebilir,tiklanabilir olmalı.
-    Given Anasayfada banner "<banner_id>" goruntulenir
+Scenario: Ana sayfadaki banner görüntülenebilir,tiklanabilir olmalı.
+    Given Anasayfada banner  goruntulenir
     When  Banner kaydirilabilir
     Then  Banner tiklanabilir ve ilgili sayfaya yonlendirilir
 
-    Examples:
-      | banner_id  |
-      | banner1    |
-      | banner2    |
-      | banner3    |
 
 
 

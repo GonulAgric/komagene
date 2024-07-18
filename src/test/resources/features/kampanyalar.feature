@@ -17,5 +17,11 @@ Feature: Kampanyalar
     And  Urun opsiyonlarini secer.
     Then Urunun sepete eklendigini dogrular.
 
+    Scenario:
+    When Kullanıcı ana sayfada herhangi bir kampanyaya tıklar.
+    And  Kullanıcı opsiyonları seçer.
+    And  Sepete ekle butonuna tıklar.
+    And  Sepette teslimat türünü değiştirir.
+    Then Değişen teslimat türü ile birlikte fiyatın değiştiğini doğrular
 
 

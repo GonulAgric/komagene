@@ -11,13 +11,19 @@ public class KampanyalarPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(id = "campingSlider")
+    @FindBy(xpath= "//*[@id=\"campingSlider\"]")
     public WebElement kampanyalar ;
 
     @FindBy(id = "")
     public WebElement kampanyaDetay ;
 
+    @FindBy(xpath = "//*[@id=\"btnSepeteEkle\"]")
+    public WebElement sepeteEkleButton2 ;
+
+    @FindBy(xpath = "//img[@alt='REDBULL KAMPANYASI 25 TL']")
+    public WebElement etiCangaKampanyasi ;
+
     @FindBy(xpath = "//*[@id=\"main-wrapper\"]/article/section/div[2]/div/ul/div/div[3]/div[2]/button")
-    public WebElement sepeteEkleButton ;
+    public WebElement sepeteEkleButton1 ;
 
 }

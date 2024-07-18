@@ -23,11 +23,13 @@ public class AramaButonuStepDef {
     }
     @And("Aranacak veriyi girer.")
     public void aranacak_veriyi_girer() {
+        bekle(3);
        aramaButonu.aramaButonu.sendKeys("ayran");
     }
     @And("Enter tusuna basar")
     public void enter_tusuna_basar() {
-      aramaButonu.aramaButonu.sendKeys(Keys.ENTER);
+
+        aramaButonu.aramaButonu.sendKeys(Keys.ENTER);
     }
     @Then("Urunlerin listelendigini dogrular.")
     public void urunlerin_listelendigini_dogrular() {
