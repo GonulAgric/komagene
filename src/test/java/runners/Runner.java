@@ -27,7 +27,7 @@ import java.util.List;
         glue = {"stepDefinations"},
         dryRun = false,
 
-        tags = "@smoke"
+        tags = "@anaSayfa"
 )
 public class Runner {
         // Tüm senaryoların çalıştırılmasının ardından yapılacak işlemler
