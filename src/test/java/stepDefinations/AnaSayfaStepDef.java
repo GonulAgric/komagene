@@ -349,7 +349,7 @@ public class AnaSayfaStepDef {
 
     @Then("Kullanici Uyelik kosullari sekmesine yonlendirilip yonlendirilmedigini dogrular.")
     public void kullaniciUyelikKosullariSekmesineYonlendirilipYonlendirilmediginiDogrular() {
-        ReusableMethods.urlDogrulama("/uyelikkosullari/uyelikkosullari");
+        ReusableMethods.urlDogrulama("/uyelik-kosullari");
 
     }
 

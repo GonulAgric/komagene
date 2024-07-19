@@ -208,6 +208,10 @@ public class AnaSayfaPage {
     public WebElement konuAlani;
 
 
+   @FindBy(xpath = "//*[@id=\"registerFormMobil\"]/div/div/div[2]/div[3]/div/div/label")
+    public WebElement aydınlatmaMetni;
+
+
 
 
 }
